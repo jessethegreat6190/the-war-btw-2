@@ -1103,15 +1103,15 @@ figcaption {
   gap: 8px;
   align-self: flex-start;
   padding: 6px 16px;
-  border: 1px solid var(--rule-lt);
+  border: 1px solid var(--red);
   border-radius: 999px;
-  background: #fff;
+  background: var(--red-lt);
   font-family: var(--sans);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-4);
+  color: var(--red);
 }
 
 .dc-badge-dot {
