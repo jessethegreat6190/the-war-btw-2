@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The War Before the War - Thraets</title>
+  <meta name="description" content="How Rwanda, M23, and Kinshasa weaponised information infrastructure to shape the battlefield." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Masthead -->
+<header class="masthead" id="masthead">
+  <div class="mh-inner">
+    <div class="mh-left">
+      <a href="#top" class="mh-brand">
+        <span class="mh-brand-dot"></span>
+        Thraets
+      </a>
+      <nav class="mh-nav">
+        <a href="#opening" class="mh-link">Introduction</a>
+        <a href="#evidence" class="mh-link">Evidence</a>
+        <a href="#operations" class="mh-link">Operations</a>
+        <a href="#data-center" class="mh-link">Analysis</a>
+      </nav>
+    </div>
+    <a href="#opening" class="pill-btn">Read report</a>
+  </div>
+</header>
+
+<!-- Developing ticker -->
+<div class="ticker-wrap" aria-label="Developing news">
+  <div class="ticker-track">
+    <div class="ticker-group">
+      <span class="ticker-label">
+        <span class="ticker-dot"></span>
+        Developing
+      </span>
+      <span class="ticker-item">M23 offensive intensifies in North Kivu province</span>
+      <span class="ticker-sep">/</span>
+      <span class="ticker-item">EU Council reviews sanctions package for Kinshasa officials</span>
+      <span class="ticker-sep">/</span>
+      <span class="ticker-item">Information operations detected across 12 hashtags including #TshisekediIsKilling</span>
+    </div>
+    <div class="ticker-group">
+      <span class="ticker-label">
+        <span class="ticker-dot"></span>
+        Developing
+      </span>
+      <span class="ticker-item">M23 offensive intensifies in North Kivu province</span>
+      <span class="ticker-sep">/</span>
+      <span class="ticker-item">EU Council reviews sanctions package for Kinshasa officials</span>
+      <span class="ticker-sep">/</span>
+      <span class="ticker-item">Information operations detected across 12 hashtags including #TshisekediIsKilling</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- Cluster visualization -->
+<div class="cluster-wrap" id="clusterWrap">
+  <canvas id="clusterCanvas"></canvas>
+  <div class="cluster-caption" id="clusterCaption">
+    <div class="cluster-label">Three campaigns &middot; One target</div>
+    <p>The most significant campaign was aimed at the same small room where the decisions were being made.</p>
+  </div>
+  <div class="cluster-scroll">Scroll to read &darr;</div>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero-bg" style="background-image: url('assets/congo-a4.jpeg');"></div>
+  <div class="hero-overlay"></div>
+  <div class="container-wide hero-inner">
+    <div class="hero-text">
+      <div class="section-eyebrow hero-eyebrow">A Thraets Investigation</div>
+      <h1 id="hero-title" class="hero-title">The War Before the <em class="hero-em">War</em></h1>
+      <p class="hero-subtitle">How Rwanda, M23, and Kinshasa weaponised information infrastructure to shape the battlefield.</p>
+      <div class="hero-byline">
+        <div class="hero-byline-label">By Thraets Investigation Team</div>
+        <div class="hero-byline-meta">July 2026 · 12 min read</div>
+      </div>
+      <a href="#opening" class="pill-btn hero-cta">Read the full report <span class="pill-arrow">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats strip -->
+<section class="stats-strip" aria-label="Investigation dataset summary">
+  <div class="container-wide">
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-value">2,000+</span>
+        <span class="stat-label">Posts analysed</span>
+      </div>
+      <span class="stat-divider"></span>
+      <div class="stat-item">
+        <span class="stat-value">12</span>
+        <span class="stat-label">Hashtags tracked</span>
+      </div>
+      <span class="stat-divider"></span>
+      <div class="stat-item">
+        <span class="stat-value">3</span>
+        <span class="stat-label">Distinct campaigns</span>
+      </div>
+      <span class="stat-divider"></span>
+      <div class="stat-item">
+        <span class="stat-value">90</span>
+        <span class="stat-label">Days monitored</span>
+      </div>
+      <span class="stat-divider"></span>
+      <div class="stat-item">
+        <span class="stat-value stat-accent">0</span>
+        <span class="stat-label">Prosecutions</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Editorial section -->
+<section id="opening" aria-labelledby="opening-title">
+  <div class="container-editorial">
+    <article class="article-col">
+      <div class="reveal">
+        <div class="section-eyebrow">01 The Opening</div>
+        <h2 id="opening-title" class="section-heading">A visit, a denial, and the information battle that followed</h2>
+      </div>
+      <div class="reveal article-body">
+        <p>On 25 January 2025, Denise Nyakeru Tshisekedi, First Lady of the Democratic Republic of Congo, walked the wards of Camp Kokolo and Tshatshi Military Hospital in Kinshasa. The men in the beds had been wounded during the M23 offensive that had occurred the previous week, in which rebel forces captured Goma, the largest city in eastern Congo.</p>
+        <p>Her visit was documented and circulated by Congolese state media: a nation&rsquo;s first lady at the bedside of its soldiers. On X, a different version of that same visit was also in circulation. Across dozens of accounts, a coordinated wave of posts claimed that the men Denise Nyakeru had visited were not Congolese soldiers at all, but fighters from the FDLR.</p>
+        <blockquote class="pull-attributed">
+          <p>&ldquo;The operation was designed not for mass persuasion, but to place one argument inside a specific institutional conversation that the DRC government, not Rwanda, was the aggressor.&rdquo;</p>
+        </blockquote>
+        <figure class="fig-row">
+          <div><img src="assets/denise-1.jpg" alt="Denise Nyakeru Tshisekedi at Camp Kokolo military hospital." /><figcaption>@andybemba on X</figcaption></div>
+          <div><img src="assets/denise-2.jpg" alt="Denise Nyakeru Tshisekedi at Tshatshi Military Hospital." /><figcaption>@onduhungirehe via X</figcaption></div>
+          <div><img src="assets/denise-3.jpg" alt="Denise Nyakeru Tshisekedi visiting wounded soldiers." /><figcaption>@claudeniyonku via X</figcaption></div>
+          <div><img src="assets/denise-4.jpg" alt="Post directly tagging the EU Council." /><figcaption>The post directly tags the EU Council</figcaption></div>
+        </figure>
+        <p>That wave of posts was not addressed to Congolese citizens. It was addressed, in English, to @UN and @EUCouncil: the specific institutions with the power to sanction, to condemn, to legitimise or delegitimise. When sanctions follow a conflict, they create a named class of losers with strong incentives to fight back.</p>
+      </div>
+      <figure style="margin-top:32px;">
+        <img src="assets/fdlr-map.jpg" alt="Map showing FDLR area of influence and proximity to the Rwandan border." />
+        <figcaption>Map showing the FDLR&rsquo;s area of influence and proximity to the Rwandan border.</figcaption>
+      </figure>
+    </article>
+    <aside class="sidebar-col reveal" aria-label="At a glance context">
+      <div class="side-card">
+        <h3 class="section-eyebrow" style="margin-bottom:20px;">Key timeline</h3>
+        <div class="side-timeline">
+          <div class="side-tl-item">
+            <span class="side-tl-year">1994</span>
+            <span class="side-tl-desc">Genocide against the Tutsi in Rwanda. FDLR forms in eastern Congo.</span>
+          </div>
+          <div class="side-tl-item">
+            <span class="side-tl-year">1996&ndash;2003</span>
+            <span class="side-tl-desc">Two Congo wars. Rwanda and Uganda intervene. Millions dead.</span>
+          </div>
+          <div class="side-tl-item">
+            <span class="side-tl-year">2012</span>
+            <span class="side-tl-desc">M23 first emerges, captures Goma, then goes dormant.</span>
+          </div>
+          <div class="side-tl-item">
+            <span class="side-tl-year">2021</span>
+            <span class="side-tl-desc">M23 re-emerges, begins advancing in North Kivu.</span>
+          </div>
+          <div class="side-tl-item">
+            <span class="side-tl-year">Jan 2025</span>
+            <span class="side-tl-desc">Goma falls. The information war intensifies.</span>
+          </div>
+          <div class="side-tl-item">
+            <span class="side-tl-year">Mar 2025</span>
+            <span class="side-tl-desc">EU sanctions. The covert network&rsquo;s final wave.</span>
+          </div>
+          <div class="side-tl-item">
+            <span class="side-tl-year">Jun 2025</span>
+            <span class="side-tl-desc">Washington Accords signed. Fighting continues as of mid-2026.</span>
+          </div>
+        </div>
+      </div>
+      <div class="side-card">
+        <h3 class="section-eyebrow" style="margin-bottom:16px;">Three actors, three positions</h3>
+        <div class="side-positions">
+          <div class="side-pos">
+            <div class="side-pos-name" style="color:#c0392b;">DRC</div>
+            <p class="side-pos-desc">Foreign aggression by Rwanda. Sovereign state entitled to international protection.</p>
+          </div>
+          <div class="side-pos">
+            <div class="side-pos-name" style="color:#c0392b;">Rwanda</div>
+            <p class="side-pos-desc">Defensive action. The international community failed to neutralise the FDLR for 30 years.</p>
+          </div>
+          <div class="side-pos">
+            <div class="side-pos-name" style="color:#c0392b;">M23/AFC</div>
+            <p class="side-pos-desc">Indigenous Congolese movement with legitimate grievances, not a Rwandan proxy.</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- Evidence section -->
+<section id="evidence" class="section-alt-evidence" aria-labelledby="evidence-title">
+  <div class="container-wide">
+    <div class="ev-header">
+      <div>
+        <div class="section-eyebrow">02 Evidence</div>
+        <h2 id="evidence-title" class="section-heading">Posts from the dataset</h2>
+      </div>
+      <div class="ev-nav">
+        <button type="button" class="ev-nav-btn" id="evPrev" aria-label="Previous evidence item">&larr;</button>
+        <button type="button" class="ev-nav-btn" id="evNext" aria-label="Next evidence item">&rarr;</button>
+      </div>
+    </div>
+    <div class="ev-track-wrap">
+      <div class="ev-track" id="evTrack">
+        <article class="ev-card" data-index="0">
+          <div class="ev-card-header">
+            <div class="ev-avatar" style="background:#c0392b;">R</div>
+            <div>
+              <div class="ev-name">Rwanda In Uganda</div>
+              <div class="ev-handle">@RwandaInUganda</div>
+            </div>
+          </div>
+          <div class="ev-card-body">
+            <p class="ev-text">The so-called First Lady of DRC visiting FDLR genocidal fighters at Kokolo hospital. This is who @UN and @EUCouncil are protecting. #TshisekediIsKilling</p>
+            <div class="ev-meta">Jan 27, 2025 <span aria-hidden="true">·</span> 4.2K views</div>
+          </div>
+        </article>
+        <article class="ev-card" data-index="1">
+          <div class="ev-card-header">
+            <div class="ev-avatar" style="background:#1a1a1a;">M</div>
+            <div>
+              <div class="ev-name">M23 Congo</div>
+              <div class="ev-handle">@M23Congo</div>
+            </div>
+          </div>
+          <div class="ev-card-body">
+            <p class="ev-text">@UN @EUCouncil the FDLR are not soldiers of FARDC. They are genocidal militias. Why is the world silent while Tshisekedi uses them against his own people?</p>
+            <div class="ev-meta">Jan 28, 2025 <span aria-hidden="true">·</span> 8.7K views</div>
+          </div>
+        </article>
+        <article class="ev-card" data-index="2">
+          <div class="ev-card-header">
+            <div class="ev-avatar" style="background:#a03020;">S</div>
+            <div>
+              <div class="ev-name">Struggles_23</div>
+              <div class="ev-handle">@Struggles_23</div>
+            </div>
+          </div>
+          <div class="ev-card-body">
+            <p class="ev-text">@UN @EUCouncil Do you support genocide? Because Tshisekedi&rsquo;s government is fighting alongside FDLR genocidaires. Sanction Kinshasa now! #TshisekediIsKilling #CongolaisTelema</p>
+            <div class="ev-meta">Feb 4, 2025 <span aria-hidden="true">·</span> 1.1K views</div>
+          </div>
+        </article>
+        <article class="ev-card" data-index="3">
+          <div class="ev-card-header">
+            <div class="ev-avatar" style="background:#c0392b;">M</div>
+            <div>
+              <div class="ev-name">MooniPeter</div>
+              <div class="ev-handle">@MooniPeter</div>
+            </div>
+          </div>
+          <div class="ev-card-body">
+            <p class="ev-text">@EUCouncil Tshisekedi uses state jets to genocide Banyamulenge. 10 posts in 11 seconds. You decide if that&rsquo;s organic.</p>
+            <div class="ev-meta">Feb 6, 2025 <span aria-hidden="true">·</span> 680 views</div>
+          </div>
+        </article>
+        <article class="ev-card" data-index="4">
+          <div class="ev-card-header">
+            <div class="ev-avatar" style="background:#1a1a1a;">A</div>
+            <div>
+              <div class="ev-name">African Truth Teller</div>
+              <div class="ev-handle">@RwandaN41033494</div>
+            </div>
+          </div>
+          <div class="ev-card-body">
+            <p class="ev-text">Kagame sent disguised troops to kill Tutsi families in Rwanda 1990-94 and now does same in DRC. #rubavu #gisenyi #KagameIsKilling #RDFNefativeForce</p>
+            <div class="ev-meta">Feb 8, 2025 <span aria-hidden="true">·</span> 3.8K views</div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <p class="ev-caption">Selected posts from the dataset, each revealing a different operation's signature.</p>
+  </div>
+</section>
+
+<!-- Operations section -->
+<section id="operations" aria-labelledby="operations-title">
+  <div class="container-wide">
+    <div class="reveal" style="max-width:720px;">
+      <div class="section-eyebrow">03 Three Operations</div>
+      <h2 id="operations-title" class="section-heading">Three operations. One information space.</h2>
+      <p class="ops-lede">The investigation identified three distinct campaigns operating simultaneously, each with a different author, target, and theory of how narratives win wars.</p>
+    </div>
+    <div class="reveal ops-stack">
+
+      <!-- Op 01 -->
+      <article class="ops-card">
+        <div class="ops-number">Operation 01</div>
+        <h3 class="ops-heading">The Anti-Tshisekedi Burst Network</h3>
+        <p class="ops-desc">This campaign&rsquo;s stated target, in 181 of 612 posts, was @UN and @EUCouncil, tagged as opening tokens. The operation was designed not for mass persuasion, but to place one argument inside a specific institutional conversation: that the DRC government, not Rwanda, was the aggressor.</p>
+        <div class="ops-metrics">
+          <div class="ops-metric"><span class="ops-metric-val">90</span><span class="ops-metric-lbl">accounts</span></div>
+          <div class="ops-metric"><span class="ops-metric-val">612</span><span class="ops-metric-lbl">posts</span></div>
+          <div class="ops-metric"><span class="ops-metric-val">181</span><span class="ops-metric-lbl">tagged @UN/EU</span></div>
+          <div class="ops-metric"><span class="ops-metric-val">71K</span><span class="ops-metric-lbl">total views</span></div>
+        </div>
+        <div class="ops-evidence-blocks">
+          <div class="ops-evidence-block">
+            <h4 class="ops-evidence-title">N1: Tshisekedi as FDLR patron</h4>
+            <p class="ops-evidence-text">The DRC president is recast from the leader of an invaded state into the financier of a genocidal militia.</p>
+          </div>
+          <div class="ops-evidence-block">
+            <h4 class="ops-evidence-title">N2: The DRC as genocidal aggressor</h4>
+            <p class="ops-evidence-text">FARDC airstrikes on M23-aligned positions are reframed as the aerial extermination of Banyamulenge and Tutsi civilians.</p>
+          </div>
+          <div class="ops-evidence-block">
+            <h4 class="ops-evidence-title">N3: Tshisekedi as obstacle to peace</h4>
+            <p class="ops-evidence-text">International sanctions framed as rewarding the victim narrative of an aggressor.</p>
+          </div>
+          <div class="ops-evidence-block">
+            <h4 class="ops-evidence-title">Feature: Burst posting</h4>
+            <p class="ops-evidence-text">Multiple accounts published their entire quarterly output in windows of seconds to minutes. Several posts sharing the same timestamp to the second. The pattern is consistent with operators pasting from a prepared list.</p>
+            <ul class="ops-evidence-list">
+              <li>MooniPeter: 10 posts in 11 sec</li>
+              <li>NKOTANYI1_: 21 posts in 30 sec</li>
+              <li>FrancoisOb1705: 20 posts in 2.6 min</li>
+              <li>TuyisengeD22748: 28 posts in 7.8 min</li>
+            </ul>
+          </div>
+          <div class="ops-evidence-block">
+            <h4 class="ops-evidence-title">Feature: Script numbering</h4>
+            <p class="ops-evidence-text">Two accounts published posts carrying the line numbers of the source document the text was copied from. @BertherNis26873 posted a list item numbered &ldquo;1.&rdquo; and @umuzunguwashomy posted &ldquo;45.&rdquo; implying a master list running to at least 45 entries.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Op 02 -->
+      <article class="ops-card">
+        <div class="ops-number">Operation 02</div>
+        <h3 class="ops-heading">The Anti-Kagame Hashtag Flooder</h3>
+        <p class="ops-desc">A single, dedicated operative achieved more reach than a 90-account network through surgical hashtag hijacking and curation. Its target was a search surface: the organic information environment anyone encounters when looking up the conflict.</p>
+        <div class="ops-metrics">
+          <div class="ops-metric"><span class="ops-metric-val">1</span><span class="ops-metric-lbl">account</span></div>
+          <div class="ops-metric"><span class="ops-metric-val">152</span><span class="ops-metric-lbl">posts</span></div>
+          <div class="ops-metric"><span class="ops-metric-val">200</span><span class="ops-metric-lbl">median views/post</span></div>
+          <div class="ops-metric"><span class="ops-metric-val">36K</span><span class="ops-metric-lbl">total views</span></div>
+        </div>
+        <div class="ops-evidence-blocks">
+          <div class="ops-evidence-block">
+            <h4 class="ops-evidence-title">N1: The double genocide framing</h4>
+            <p class="ops-evidence-text">The account&rsquo;s bio claimed Kagame sent disguised troops to kill Tutsi families in Rwanda between 1990 and 1994, then presented himself as their saviour.</p>
+          </div>
+          <div class="ops-evidence-block">
+            <h4 class="ops-evidence-title">N2: Amplification of diaspora media</h4>
+            <p class="ops-evidence-text">Rather than producing original content, the account curated: VOA Afrique, TV5 Monde, Radio Itahuka, Radio Inkingi, framing each link with its fixed hashtag block.</p>
+          </div>
+          <div class="ops-evidence-block">
+            <h4 class="ops-evidence-title">Feature: Fixed hashtag block</h4>
+            <p class="ops-evidence-text">Every post carried an identical 13-hashtag block mixing neutral place names with attack hashtags. Appeared in 109 of 152 posts.</p>
+            <ul class="ops-evidence-list">
+              <li>#rubavu #gisenyi #rwanda #burundi #kigali #kinshasa</li>
+              <li>#Africa #congo #goma #guerre</li>
+              <li>#KagameIsKilling #KagameIsACriminal #RDFNefativeForce</li>
+            </ul>
+          </div>
+          <div class="ops-evidence-block">
+            <h4 class="ops-evidence-title">Feature: Engagement paradox</h4>
+            <p class="ops-evidence-text">One account outperforms a 90-account network. @RwandaN41033494 achieved a median of 200 views per post. The entire 90-account covert network achieved a median of 14.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Op 03 -->
+      <article class="ops-card">
+        <div class="ops-number">Operation 03</div>
+        <h3 class="ops-heading">CongolaisTelema</h3>
+        <p class="ops-desc">The DRC government&rsquo;s domestic mobilisation response to the M23 offensive. Fronted by Communications Minister Patrick Muyaya and carried on national broadcaster RTNC, it operated openly at scale with verified accounts and institutional reach.</p>
+        <div class="ops-metrics">
+          <div class="ops-metric"><span class="ops-metric-val">215</span><span class="ops-metric-lbl">accounts</span></div>
+          <div class="ops-metric"><span class="ops-metric-val">336</span><span class="ops-metric-lbl">posts</span></div>
+          <div class="ops-metric"><span class="ops-metric-val">1.5M</span><span class="ops-metric-lbl">peak week views</span></div>
+          <div class="ops-metric"><span class="ops-metric-val">245</span><span class="ops-metric-lbl">peak day posts</span></div>
+        </div>
+        <div class="ops-evidence-blocks">
+          <div class="ops-evidence-block">
+            <h4 class="ops-evidence-title">N1: National unity and FARDC recruitment</h4>
+            <p class="ops-evidence-text">The campaign&rsquo;s primary register was patriotic mobilisation: the army needs soldiers, the country needs solidarity.</p>
+          </div>
+          <div class="ops-evidence-block">
+            <h4 class="ops-evidence-title">N2: Cultural resistance</h4>
+            <p class="ops-evidence-text">A &ldquo;Front Culturel&rdquo; of musicians and slam poets gave the campaign a civilian face beyond official government communications.</p>
+          </div>
+          <div class="ops-evidence-block">
+            <h4 class="ops-evidence-title">Feature: Verbatim duplication</h4>
+            <p class="ops-evidence-text">State text appeared word for word across nominally independent journalist and influencer accounts. Identical texts by @TosuwaPaul and @chango_wa.</p>
+          </div>
+          <div class="ops-evidence-block">
+            <h4 class="ops-evidence-title">Feature: Hashtag infiltration</h4>
+            <p class="ops-evidence-text">The covert network placed 190 posts carrying #CongolaisTelema alongside #TshisekediIsKilling, inserting genocide accusations into the search results of the DRC government&rsquo;s own hashtag.</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- Data center -->
+<section id="data-center" class="section-alt-evidence" aria-labelledby="data-title">
+  <div class="container-wide">
+    <div class="reveal dc-header">
+      <div>
+        <div class="section-eyebrow">Analysis &amp; Metrics</div>
+        <h2 id="data-title" class="section-heading">Data center</h2>
+      </div>
+      <div class="dc-badge">
+        <span class="dc-badge-dot"></span>
+        Methodology: forensic post analysis
+      </div>
+    </div>
+
+    <div class="reveal dc-grid">
+      <div class="dc-left">
+        <div>
+          <h3 class="dc-subhead">Engagement comparison</h3>
+          <p class="dc-desc">Total views across the three operations. The covert network produced 30% of the dataset's content but captured just 2.1% of views.</p>
+        </div>
+        <div class="dc-bars">
+          <div class="dc-bar">
+            <div class="dc-bar-label">
+              <span style="color:#c0392b;">Covert network (Op 01)</span>
+              <span>71,695 views (2.1%)</span>
+            </div>
+            <div class="dc-bar-track"><div class="dc-bar-fill" style="width:2.1%;background:#c0392b;"></div></div>
+          </div>
+          <div class="dc-bar">
+            <div class="dc-bar-label">
+              <span>Anti-Kagame flooder (Op 02)</span>
+              <span>36,621 views (1.1%)</span>
+            </div>
+            <div class="dc-bar-track"><div class="dc-bar-fill" style="width:1.1%;background:#a8a8a8;"></div></div>
+          </div>
+          <div class="dc-bar">
+            <div class="dc-bar-label">
+              <span>CongolaisTelema (Op 03)</span>
+              <span>1,535,865 views (96.8%)</span>
+            </div>
+            <div class="dc-bar-track"><div class="dc-bar-fill" style="width:96.8%;background:#1a1a1a;"></div></div>
+          </div>
+        </div>
+        <div class="dc-note">
+          <div class="dc-note-icon"></div>
+          <div>
+            <h4 class="dc-note-title">Verification note</h4>
+            <p class="dc-note-text">A single account outperformed a 90-account network on every per-post measure. Reach was not the objective for Operation 01; placement at decision points was.</p>
+          </div>
+        </div>
+      </div>
+      <div class="dc-right">
+        <h3 class="dc-subhead">Comparative performance</h3>
+        <div class="dc-table-wrap">
+          <table class="dc-table">
+            <caption class="sr-only">Comparative performance by information operation</caption>
+            <thead>
+              <tr>
+                <th scope="col">Operation</th>
+                <th scope="col" class="t-center">Accounts</th>
+                <th scope="col" class="t-center">Posts</th>
+                <th scope="col" class="t-right">Median views</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" style="color:#c0392b;">Anti-Tshisekedi Network</th>
+                <td class="t-center">90</td>
+                <td class="t-center">612</td>
+                <td class="t-right">14</td>
+              </tr>
+              <tr>
+                <th scope="row">Anti-Kagame Flooder</th>
+                <td class="t-center">1</td>
+                <td class="t-center">152</td>
+                <td class="t-right">200</td>
+              </tr>
+              <tr>
+                <th scope="row">CongolaisTelema</th>
+                <td class="t-center">215</td>
+                <td class="t-center">336</td>
+                <td class="t-right">3,200</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="dc-stats">
+          <div class="dc-stat-card">
+            <span class="dc-stat-val">181</span>
+            <span class="dc-stat-lbl">Mentions of @UN</span>
+          </div>
+          <div class="dc-stat-card">
+            <span class="dc-stat-val">90 days</span>
+            <span class="dc-stat-lbl">Dataset duration</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <hr class="section-rule" />
+    <div class="reveal chart-container">
+      <div class="chart-title">Posts per day, January&ndash;March 2025</div>
+      <div class="chart-desc">Four streams of activity across three months: the covert network (red), a single anti-Kagame flooder (amber), the CongolaisTelema state campaign (blue), and organic discussion (grey).</div>
+      <div class="chart-box">
+        <canvas id="chartTimeline"></canvas>
+      </div>
+      <div class="chart-source">Source: Thraets investigation dataset &middot; 2,000+ posts analysed</div>
+    </div>
+
+    <!-- Search result carousel -->
+    <div class="reveal search-carousel">
+      <div class="search-slide">
+        <figure>
+          <img src="assets/search-1.jpg" alt="Search result for DRC actor query." />
+          <figcaption>
+            <span class="search-q">Query: <code>terroristes congo lang:fr</code></span>
+            <span class="search-handle">@Cap_Brave &middot; Mar 13, 2025 &middot; 26K views</span>
+            A verified Congolese account shares a clip from a live event in Kinshasa. The speaker rejects any dialogue with M23, framing Rwanda&rsquo;s presence in the east as the seizure of Congolese mineral wealth.
+          </figcaption>
+        </figure>
+      </div>
+      <div class="search-slide">
+        <figure>
+          <img src="assets/search-2.jpg" alt="Search result for M23/FDLR actor query." />
+          <figcaption>
+            <span class="search-q">Query: <code>&quot;FDLR&quot; (congo)</code></span>
+            <span class="search-handle">@pascal_mulegwa &middot; Mar 14, 2025 &middot; 40K views</span>
+            A Kinshasa journalist shares a DRC Minister of Trade clip on German broadcaster DW. His argument: the FDLR Rwanda claims to be pursuing are a pretext. What Rwanda is actually pursuing are the minerals.
+          </figcaption>
+        </figure>
+      </div>
+      <div class="search-slide">
+        <figure>
+          <img src="assets/search-3.jpg" alt="Search result for Banyamulenge keyword." />
+          <figcaption>
+            <span class="search-q">Query: <code>Banyamulenge</code></span>
+            <span class="search-handle">@MaishaRdc &middot; Feb 1, 2025 &middot; 60K views</span>
+            A hate-speech monitoring account reports the alleged killing of a Banyamulenge FARDC officer by his own comrades on grounds of Tutsi ethnicity.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Conclusion -->
+<section id="conclusion" aria-labelledby="conclusion-title">
+  <div class="container-wide">
+    <div class="reveal" style="max-width:720px;">
+      <div class="section-eyebrow">04 What It Means</div>
+      <h2 id="conclusion-title" class="section-heading">The target was never the crowd</h2>
+    </div>
+    <div class="reveal conclusion-body">
+      <p>Propaganda, in its classical form, is a mass exercise. Saturate enough minds, shift the mood of a population, and you shift what governments feel they can do. The megaphone is its instrument. The crowd was its target.</p>
+
+      <blockquote class="pull-attributed">
+        <p>&ldquo;The prevailing instinct, when confronted with influence operations, is to reach for the label of misinformation: to find the lie and correct it. That instinct fails here, because there is no clean lie to correct.&rdquo;</p>
+      </blockquote>
+
+      <p>What this investigation documents is not simply a disinformation campaign. It is a campaign that understood, with some precision, that the battlefield for this conflict had shifted. Not to African television networks or newspaper front pages, but to a digital space with almost no equivalent rules, gatekeepers, or friction   one where a numbered list, a few dozen disposable accounts, and knowledge of when the relevant institution meets is sufficient infrastructure for an operation aimed at the Security Council.</p>
+
+      <p>That shift matters because the old instincts for countering narrative manipulation were built for a different terrain. When the battleground was media, the intervention point was the editor, the fact-checker, the broadcaster's standards desk. In the environment this operation exploited, none of those friction points exist.</p>
+
+      <blockquote class="pull-attributed">
+        <p>&ldquo;What this investigation documented   a network pushing the narrative that the FDLR was the real problem, that Rwanda's posture was defensive, that Tshisekedi was the obstacle to peace   did not, on the evidence available, cause that outcome. But the frame those operations were working to install in New York and Brussels in March 2025 is recognisably present in the architecture of the agreement that followed.&rdquo;</p>
+      </blockquote>
+
+      <p>The UN documents FARDC cooperation with FDLR elements. Anti-Tutsi violence in the DRC is real. The FARDC did bomb Minembwe, and Banyamulenge civilians do live there. The network's work was not fabrication. It was <strong>re-voicing</strong>: taking documented facts, stripping their context, removing attribution, and reassembling them into a picture that served a particular conclusion.</p>
+
+      <p>This is what the FIMI framework was developed to capture and what the misinformation framing misses. The problem is not always false information. It is true information, selectively assembled and re-voiced through personas designed to appear as the spontaneous testimony of civilians.</p>
+
+      <blockquote class="pull-attributed">
+        <p>&ldquo;That gap is the operational environment this network exploited. The asymmetry between the sophistication of the manipulation and the capacity of the defence is not incidental to this story. <strong>It is the story.</strong>&rdquo;</p>
+      </blockquote>
+    </div>
+
+    <div class="reveal conclusion-actions">
+      <a href="#data-center" class="pill-btn">Explore the evidence <span class="pill-arrow">&rarr;</span></a>
+      <a href="#footer" class="pill-btn pill-btn-outline">Methodology &amp; sources</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer id="footer" class="site-footer">
+  <div class="container-wide">
+    <div class="ft-grid">
+      <div class="ft-brand-col">
+        <a href="#top" class="ft-brand">
+          <span class="ft-brand-dot"></span>
+          Thraets
+        </a>
+        <p class="ft-desc">An investigative project monitoring information operations and digital conflict infrastructure.</p>
+      </div>
+      <div class="ft-group">
+        <h4 class="section-eyebrow">Investigations</h4>
+        <ul class="ft-links">
+          <li><a href="#data-center">Digital Battlefield</a></li>
+          <li><a href="#data-center">Information War</a></li>
+          <li><a href="#data-center">Conflict Tech</a></li>
+        </ul>
+      </div>
+      <div class="ft-group">
+        <h4 class="section-eyebrow">Methodology</h4>
+        <ul class="ft-links">
+          <li><a href="#data-center">Data collection</a></li>
+          <li><a href="#data-center">Forensic scraping</a></li>
+          <li><a href="#data-center">Verification process</a></li>
+        </ul>
+      </div>
+      <div class="ft-group">
+        <h4 class="section-eyebrow">Follow</h4>
+        <a href="mailto:hello@thraets.org" class="ft-social">@</a>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>&copy; 2026 Thraets Research &amp; Advisory. All rights reserved.</span>
+      <div class="ft-legal">
+        <a href="#footer">Privacy Policy</a>
+        <a href="#footer">Terms of Service</a>
+        <a href="#footer">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="app.js"></script>
+<script>
+// Progress bar
+(function() {
+  var bar = document.getElementById('progressBar');
+  if (!bar) return;
+  function update() {
+    var s = window.scrollY;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = h > 0 ? Math.min(s / h * 100, 100) : 0;
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+// Evidence carousel navigation
+(function() {
+  var track = document.getElementById('evTrack');
+  if (!track) return;
+  var cards = track.querySelectorAll('.ev-card');
+  var prevBtn = document.getElementById('evPrev');
+  var nextBtn = document.getElementById('evNext');
+  var current = 0;
+  function scrollTo(index) {
+    if (index < 0) index = cards.length - 1;
+    if (index >= cards.length) index = 0;
+    current = index;
+    cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    cards.forEach(function(c, i) {
+      c.classList.toggle('ev-card-active', i === index);
+    });
+  }
+  if (prevBtn) prevBtn.addEventListener('click', function() { scrollTo(current - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { scrollTo(current + 1); });
+  if (cards.length > 0) cards[0].classList.add('ev-card-active');
+})();
+
+// Reveal scroll animation
+(function() {
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  function check() {
+    var h = window.innerHeight;
+    els.forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < h - 60) el.classList.add('revealed');
+    });
+  }
+  window.addEventListener('scroll', check, { passive: true });
+  window.addEventListener('resize', check);
+  check();
+})();
+</script>
+</body>
+</html>
