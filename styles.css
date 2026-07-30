@@ -377,13 +377,13 @@ figcaption {
 .mh-link {
   font-family: var(--sans);
   font-size: 14px;
-  font-weight: 500;
-  color: var(--ink-4);
+  font-weight: 600;
+  color: var(--ink-2);
   text-decoration: none;
   transition: color .15s;
 }
 
-.mh-link:hover { color: var(--ink); text-decoration: none; }
+.mh-link:hover { color: var(--red); text-decoration: none; }
 
 @media (max-width: 640px) {
   .mh-nav { display: none; }
