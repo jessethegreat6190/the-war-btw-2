@@ -627,11 +627,23 @@ figcaption {
 /* Editorial section */
 #opening {
   padding: 64px 0;
-  background: url('assets/paper-texture.webp') center/cover no-repeat, #fdfaf6;
+  background-color: #fdfaf6;
+  background-image: url('assets/paper-texture.webp');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 @media (min-width: 768px) {
   #opening { padding: 96px 0; }
+}
+
+
+
+#opening .article-col p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #2a2a2a;
 }
 
 .container-editorial {
