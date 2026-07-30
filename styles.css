@@ -27,8 +27,8 @@ html {
   --sans: 'DM Sans', system-ui, sans-serif;
   --mono: 'DM Mono', 'IBM Plex Mono', monospace;
   --col: 680px;
-  --col-editorial: 860px;
-  --col-wide: 860px;
+  --col-editorial: 720px;
+  --col-wide: 720px;
   --col-max: 1120px;
   --gutter: clamp(20px, 5vw, 80px);
 }
@@ -38,7 +38,7 @@ body {
   font-weight: 400;
   color: var(--ink);
   background: #fdfaf6;
-  line-height: 1.78;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -636,8 +636,8 @@ figcaption {
 
 
 #opening .article-col p {
-  font-size: 1rem;
-  line-height: 1.7;
+  font-size: 1.125rem;
+  line-height: 1.85;
   color: #2a2a2a;
 }
 
