@@ -366,6 +366,12 @@ figcaption {
   flex: none;
 }
 
+.mh-logo {
+  display: block;
+  height: 26px;
+  width: auto;
+}
+
 .mh-nav { display: flex; gap: 24px; }
 
 .mh-link {
@@ -1344,6 +1350,13 @@ figcaption {
   border-radius: 4px;
   background: var(--red);
   flex: none;
+}
+
+.ft-logo {
+  display: block;
+  height: 36px;
+  width: auto;
+  margin-bottom: 8px;
 }
 
 .ft-desc {
