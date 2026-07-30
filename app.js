@@ -198,7 +198,7 @@
       ].forEach(function(item) {
         ctx.save();
         ctx.globalAlpha = 0.85;
-        ctx.font = '400 ' + labelSize + "px 'DM Sans', system-ui, sans-serif";
+        ctx.font = '400 ' + labelSize + "px 'Libre Franklin', system-ui, sans-serif";
         ctx.fillStyle = item.col.stroke;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';

@@ -23,9 +23,10 @@ html {
   --paper: #fdfaf6;
   --paper-2: #f8f7f3;
   --alt-bg: #f0eeeb;
-  --body: 'Bitter', Georgia, serif;
-  --sans: 'DM Sans', system-ui, sans-serif;
-  --mono: 'DM Mono', 'IBM Plex Mono', monospace;
+  --body: 'Noto Serif', Georgia, serif;
+  --sans: 'Libre Franklin', system-ui, sans-serif;
+  --display: 'Playfair Display', Georgia, serif;
+  --mono: 'Courier Prime', 'IBM Plex Mono', monospace;
   --col: 680px;
   --col-editorial: 720px;
   --col-wide: 720px;
@@ -645,7 +646,7 @@ figcaption {
 }
 
 .opening-heading {
-  font-family: var(--body);
+  font-family: var(--display);
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.3;
