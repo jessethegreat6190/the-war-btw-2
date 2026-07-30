@@ -627,6 +627,7 @@ figcaption {
 /* Editorial section */
 #opening {
   padding: 64px 0;
+  background: url('assets/paper-texture.webp') center/cover no-repeat, #fdfaf6;
 }
 
 @media (min-width: 768px) {
