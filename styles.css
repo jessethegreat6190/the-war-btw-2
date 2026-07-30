@@ -1540,3 +1540,15 @@ figcaption {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Quotes slide in from above */
+.reveal-top {
+  opacity: 0;
+  transform: translateY(-24px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.reveal-top.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
