@@ -627,11 +627,18 @@ figcaption {
 /* Editorial section */
 #opening {
   padding: 64px 0;
-  background-color: #fdfaf6;
-  background-image: url('assets/paper-texture.webp');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  position: relative;
+  background: #fdfaf6;
+}
+
+#opening::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('assets/paper-texture.webp') center/cover no-repeat;
+  filter: blur(2px);
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 @media (min-width: 768px) {
@@ -649,6 +656,8 @@ figcaption {
 .container-editorial {
   display: grid;
   gap: 48px;
+  position: relative;
+  z-index: 1;
 }
 
 @media (min-width: 1024px) {
