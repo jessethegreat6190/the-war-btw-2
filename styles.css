@@ -23,7 +23,6 @@ html {
   --paper: #fdfaf6;
   --paper-2: #f8f7f3;
   --alt-bg: #f0eeeb;
-  --card: #fff;
   --body: 'Noto Serif', Georgia, serif;
   --sans: 'Libre Franklin', system-ui, sans-serif;
   --display: 'Archivo Black', 'Arial Black', sans-serif;
@@ -287,7 +286,7 @@ figcaption {
 
 .search-slide figure {
   margin: 0;
-  background: var(--card);
+  background: #fff;
   border: 1px solid var(--rule-lt);
   border-radius: 8px;
   overflow: hidden;
@@ -345,8 +344,6 @@ figcaption {
   border-bottom: 1px solid var(--rule-vlite);
 }
 
-html.dark .masthead { background: rgba(8,8,8,0.95); }
-
 .mh-inner {
   max-width: var(--col-max);
   margin: 0 auto;
@@ -358,34 +355,7 @@ html.dark .masthead { background: rgba(8,8,8,0.95); }
   gap: 24px;
 }
 
-.mh-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--rule-lt);
-  border-radius: 50%;
-  background: var(--paper);
-  color: var(--ink-2);
-  cursor: pointer;
-  font-size: 15px;
-  line-height: 1;
-  transition: border-color .15s, color .15s, background .15s;
-}
-
-.theme-toggle:hover {
-  border-color: var(--red);
-  color: var(--red);
-}
-
-.mh-left { display: flex; align-items: center; gap: 40px; }
+.mh-left { display: flex; align-items: center; gap: 40px; flex: 1; }
 
 .mh-brand {
   display: flex;
@@ -414,7 +384,7 @@ html.dark .masthead { background: rgba(8,8,8,0.95); }
   width: auto;
 }
 
-.mh-nav { display: flex; gap: 24px; }
+.mh-nav { display: flex; gap: 24px; margin-left: auto; }
 
 .mh-link {
   font-family: var(--sans);
@@ -624,7 +594,7 @@ html.dark .masthead { background: rgba(8,8,8,0.95); }
 .stats-strip {
   border-top: 1px solid var(--rule-lt);
   border-bottom: 1px solid var(--rule-lt);
-  background: var(--card);
+  background: #fff;
   padding: 24px 0;
 }
 
@@ -795,7 +765,7 @@ html.dark .masthead { background: rgba(8,8,8,0.95); }
 
 /* Sidebar cards */
 .side-card {
-  background: var(--card);
+  background: #fff;
   border: 1px solid var(--rule-lt);
   border-radius: 12px;
   padding: 24px;
@@ -934,7 +904,7 @@ html.dark .masthead { background: rgba(8,8,8,0.95); }
   justify-content: center;
   border: 1px solid var(--rule-lt);
   border-radius: 50%;
-  background: var(--card);
+  background: #fff;
   color: var(--ink-4);
   cursor: pointer;
   transition: border-color .15s, color .15s;
@@ -969,7 +939,7 @@ html.dark .masthead { background: rgba(8,8,8,0.95); }
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid var(--rule-lt);
-  background: var(--card);
+  background: #fff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   transition: border-color .15s, box-shadow .15s;
 }
@@ -1072,7 +1042,7 @@ html.dark .masthead { background: rgba(8,8,8,0.95); }
 }
 
 .ops-card {
-  background: var(--card);
+  background: #fff;
   border: 1px solid var(--rule-lt);
   border-radius: 12px;
   padding: 28px;
@@ -1284,7 +1254,7 @@ html.dark .masthead { background: rgba(8,8,8,0.95); }
 .dc-bar-track {
   height: 8px;
   border-radius: 999px;
-  background: var(--card);
+  background: #fff;
   overflow: hidden;
 }
 
@@ -1301,7 +1271,7 @@ html.dark .masthead { background: rgba(8,8,8,0.95); }
   padding: 24px;
   border: 1px solid var(--rule-lt);
   border-radius: 12px;
-  background: var(--card);
+  background: #fff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 
@@ -1364,8 +1334,8 @@ html.dark .masthead { background: rgba(8,8,8,0.95); }
 }
 
 .dc-table tbody tr:nth-child(odd) { background: rgba(248,247,243,0.6); }
-.dc-table tbody tr:nth-child(even) { background: var(--card); }
-.dc-table tbody tr:hover { background: var(--card); }
+.dc-table tbody tr:nth-child(even) { background: #fff; }
+.dc-table tbody tr:hover { background: #fff; }
 
 .dc-table tbody th {
   padding: 16px;
@@ -1391,7 +1361,7 @@ html.dark .masthead { background: rgba(8,8,8,0.95); }
   padding: 20px;
   border: 1px solid var(--rule-lt);
   border-radius: 12px;
-  background: var(--card);
+  background: #fff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 
@@ -1533,7 +1503,7 @@ html.dark .masthead { background: rgba(8,8,8,0.95); }
   justify-content: center;
   border: 1px solid var(--rule-lt);
   border-radius: 50%;
-  background: var(--card);
+  background: #fff;
   font-family: var(--sans);
   font-size: 12px;
   color: var(--ink-4);
@@ -1598,31 +1568,3 @@ html.dark .masthead { background: rgba(8,8,8,0.95); }
   transform: translateY(0);
 }
 
-/* ============ Dark theme (Nairobi Corridor style) ============ */
-html.dark {
-  --ink: #f0f0f0;
-  --ink-2: #cfcfcf;
-  --ink-3: #9a9a9a;
-  --ink-4: #777;
-  --ink-5: #555;
-  --red: #e74c3c;
-  --red-lt: #3a1712;
-  --rule: #e74c3c;
-  --rule-lt: #222;
-  --rule-vlite: rgba(255,255,255,0.08);
-  --paper: #080808;
-  --paper-2: #0e0e0e;
-  --alt-bg: #131313;
-  --card: #141414;
-  color-scheme: dark;
-}
-
-html.dark body { background: var(--paper); }
-
-html.dark .ticker-wrap,
-html.dark .hero-overlay,
-html.dark .dc-table thead { background: #0a0a0a; }
-
-html.dark .dc-table tbody tr:nth-child(odd) { background: rgba(255,255,255,0.03); }
-
-html.dark #evidence::before { opacity: 0.12; }
