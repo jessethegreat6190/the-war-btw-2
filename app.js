@@ -3,6 +3,31 @@
 
   var D = window.TWB;
 
+  /* ---- Theme toggle ---- */
+  (function() {
+    var btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    var icon = btn.querySelector('.theme-toggle-icon');
+
+    function apply(forceDark) {
+      var dark = (forceDark === undefined) ? document.documentElement.classList.contains('dark') : forceDark;
+      document.documentElement.classList.toggle('dark', dark);
+      icon.innerHTML = dark ? '&#9788;' : '&#9790;';
+      btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+      try { localStorage.setItem('twb-theme', dark ? 'dark' : 'light'); } catch (e) {}
+      window.dispatchEvent(new CustomEvent('themechange', { detail: { dark: dark } }));
+    }
+
+    var saved = null;
+    try { saved = localStorage.getItem('twb-theme'); } catch (e) {}
+    apply(saved === 'dark');
+
+    btn.addEventListener('click', function() {
+      apply(!document.documentElement.classList.contains('dark'));
+    });
+  })();
+
   /* ---- Cluster animation ---- */
   (function() {
     var canvas = document.getElementById('clusterCanvas');
@@ -243,10 +268,22 @@
     var AMBER = '#d28c28';
     var BLUE = '#2a5fa8';
     var GREY = '#7a7468';
+    var UI_FONT = "'Libre Franklin', system-ui, sans-serif";
 
-    var ctx = document.getElementById('chartTimeline');
-    if (ctx) {
-      new Chart(ctx, {
+    var chartInstance = null;
+
+    function isDark() {
+      return document.documentElement.classList.contains('dark');
+    }
+
+    function buildChart() {
+      var dark = isDark();
+      var ctx = document.getElementById('chartTimeline');
+      if (!ctx) return;
+
+      if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+
+      chartInstance = new Chart(ctx, {
         type: 'line',
         data: {
           labels: cd.dates,
@@ -302,34 +339,40 @@
           plugins: {
             legend: {
               position: 'bottom',
-              labels: { font: { family: "'DM Sans', system-ui, sans-serif", size: 11 }, padding: 16, usePointStyle: true, pointStyle: 'line' },
+              labels: { font: { family: UI_FONT, size: 11 }, color: dark ? '#cfcfcf' : '#2e2e2e', padding: 16, usePointStyle: true, pointStyle: 'line' },
             },
             tooltip: {
-              backgroundColor: '#fff',
-              borderColor: '#e0ddd5',
+              backgroundColor: dark ? '#141414' : '#fff',
+              borderColor: dark ? '#222' : '#e0ddd5',
               borderWidth: 1,
-              titleColor: '#1a1a1a',
-              bodyColor: '#2e2e2e',
+              titleColor: dark ? '#f0f0f0' : '#1a1a1a',
+              bodyColor: dark ? '#cfcfcf' : '#2e2e2e',
               padding: 12,
               cornerRadius: 4,
-              titleFont: { family: "'DM Sans', system-ui, sans-serif", size: 12, weight: '600' },
-              bodyFont: { family: "'DM Sans', system-ui, sans-serif", size: 12 },
+              titleFont: { family: UI_FONT, size: 12, weight: '600' },
+              bodyFont: { family: UI_FONT, size: 12 },
             },
           },
           scales: {
             x: {
               grid: { display: false },
-              ticks: { font: { family: "'DM Sans', system-ui, sans-serif", size: 10 }, color: '#7a7a7a', maxTicksLimit: 12, maxRotation: 45 },
+              ticks: { font: { family: UI_FONT, size: 10 }, color: '#7a7a7a', maxTicksLimit: 12, maxRotation: 45 },
             },
             y: {
               beginAtZero: true,
               max: 150,
-              ticks: { stepSize: 50, font: { family: "'DM Sans', system-ui, sans-serif", size: 10 }, color: '#7a7a7a' },
-              grid: { color: 'rgba(0,0,0,0.06)' },
+              ticks: { stepSize: 50, font: { family: UI_FONT, size: 10 }, color: '#7a7a7a' },
+              grid: { color: dark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)' },
             },
           },
         },
       });
     }
+
+    buildChart();
+
+    window.addEventListener('themechange', function() {
+      buildChart();
+    });
   }
 })();
