@@ -427,7 +427,7 @@ figcaption {
 .search-car-dot.active { background: var(--ink-2); }
 
 .search-car-counter {
-  font-family: var(--mono);
+  font-family: var(--ui);
   font-size: 11px;
   color: var(--ink-4);
 }
@@ -683,7 +683,7 @@ figcaption {
 }
 
 .hero-em {
-  font-style: normal;
+  font-style: italic;
   color: #c0392b;
 }
 
@@ -911,6 +911,32 @@ figcaption {
 
 .side-card + .side-card { margin-top: 24px; }
 
+.side-dataset {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.side-ds-val {
+  display: block;
+  font-family: var(--ui);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.side-ds-lbl {
+  display: block;
+  font-family: var(--ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-top: 4px;
+}
+
 .side-timeline { display: flex; flex-direction: column; }
 
 .side-tl-item {
@@ -925,7 +951,7 @@ figcaption {
 .side-tl-item:last-child { padding-bottom: 0; border-bottom: none; }
 
 .side-tl-year {
-  font-family: var(--sans);
+  font-family: var(--ui);
   font-size: 12px;
   font-weight: 700;
   color: var(--red);
@@ -1228,7 +1254,7 @@ figcaption {
 
 .ops-metric-val {
   display: block;
-  font-family: var(--mono);
+  font-family: var(--ui);
   font-size: 20px;
   font-weight: 500;
   line-height: 1;
@@ -1460,7 +1486,7 @@ figcaption {
 .dc-table tbody td {
   padding: 16px;
   color: var(--ink-4);
-  font-family: var(--sans);
+  font-family: var(--ui);
 }
 
 .dc-stats {
@@ -1479,7 +1505,7 @@ figcaption {
 
 .dc-stat-val {
   display: block;
-  font-family: var(--mono);
+  font-family: var(--ui);
   font-size: 24px;
   font-weight: 500;
   color: var(--red);
