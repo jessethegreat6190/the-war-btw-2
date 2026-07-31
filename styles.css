@@ -42,7 +42,6 @@ body {
   color: var(--ink);
   background: var(--paper);
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
@@ -1500,5 +1499,40 @@ figcaption {
 .reveal-top.revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Pull quote motion */
+@keyframes quote-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes quote-rule {
+  0%, 100% { border-left-color: var(--red); }
+  50% { border-left-color: #e74c3c; }
+}
+
+.pull-attributed {
+  animation: quote-rule 6s ease-in-out infinite;
+}
+
+.pull-attributed p {
+  animation: quote-float 6s ease-in-out infinite;
+}
+
+.pull-attributed:nth-of-type(2),
+.pull-attributed:nth-of-type(2) p { animation-delay: 1.5s; }
+
+.pull-attributed:nth-of-type(3),
+.pull-attributed:nth-of-type(3) p { animation-delay: 3s; }
+
+.pull-attributed:nth-of-type(4),
+.pull-attributed:nth-of-type(4) p { animation-delay: 4.5s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pull-attributed,
+  .pull-attributed p {
+    animation: none;
+  }
 }
 
