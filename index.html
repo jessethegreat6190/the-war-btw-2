@@ -414,10 +414,6 @@
         <div class="section-eyebrow">Analysis &amp; Metrics</div>
         <h2 id="data-title" class="section-heading">Data center</h2>
       </div>
-      <div class="dc-badge">
-        <span class="dc-badge-dot"></span>
-        Methodology: forensic post analysis
-      </div>
     </div>
 
     <div class="reveal dc-grid">
@@ -517,36 +513,68 @@
     </div>
 
     <!-- Search result carousel -->
-    <div class="reveal search-carousel">
-      <div class="search-slide">
-        <figure>
-          <img src="assets/search-1.jpg" alt="Search result for DRC actor query." />
-          <figcaption>
-            <span class="search-q">Query: <code>terroristes congo lang:fr</code></span>
-            <span class="search-handle">@Cap_Brave &middot; Mar 13, 2025 &middot; 26K views</span>
-            A verified Congolese account shares a clip from a live event in Kinshasa. The speaker rejects any dialogue with M23, framing Rwanda&rsquo;s presence in the east as the seizure of Congolese mineral wealth.
-          </figcaption>
-        </figure>
+    <div class="reveal search-carousel" id="srCarousel">
+      <div class="search-car-header">
+        <h3 class="search-car-title">A simulation of what the intended audience would see.</h3>
+        <p class="search-car-intro">An EU Council staffer or a UN analyst searching for information on the conflict during the week of the EU sanctions vote would have encountered a mixed search surface. Each query below uses a keyword associated with one of the three actors, restricted to posts published between January 1 and March 31, 2025 — the same quarter the three operations were active. None of the top results shown are posts from the covert network. What they show instead is the broader information environment those operations were designed to enter, contest, and shape.</p>
       </div>
-      <div class="search-slide">
-        <figure>
-          <img src="assets/search-2.jpg" alt="Search result for M23/FDLR actor query." />
-          <figcaption>
-            <span class="search-q">Query: <code>&quot;FDLR&quot; (congo)</code></span>
-            <span class="search-handle">@pascal_mulegwa &middot; Mar 14, 2025 &middot; 40K views</span>
-            A Kinshasa journalist shares a DRC Minister of Trade clip on German broadcaster DW. His argument: the FDLR Rwanda claims to be pursuing are a pretext. What Rwanda is actually pursuing are the minerals.
-          </figcaption>
-        </figure>
+      <div class="search-track-outer">
+        <div class="search-track" id="srTrack">
+          <div class="search-slide">
+            <div class="search-img-pane">
+              <img src="assets/search-1.jpg" alt="Search result for DRC actor query." class="search-img-zoom" />
+            </div>
+            <div class="search-text-pane">
+              <div>
+                <div class="search-kicker">Keyword 01 &middot; DRC actor</div>
+                <div class="search-q"><code>terroristes congo lang:fr</code></div>
+                <div class="search-handle">@Cap_Brave &middot; Mar 13, 2025 &middot; 26K views</div>
+                <p class="search-body">A verified Congolese account shares a clip from a live event in Kinshasa. The speaker rejects any dialogue with M23, framing Rwanda&rsquo;s presence in the east as the seizure of Congolese mineral wealth.</p>
+                <p class="search-proximity">Posted one day before Wave 3 of the covert network activated. The two frames were competing for the same search results and the same institutional attention.</p>
+              </div>
+            </div>
+          </div>
+          <div class="search-slide">
+            <div class="search-img-pane">
+              <img src="assets/search-2.jpg" alt="Search result for M23/FDLR actor query." class="search-img-zoom" />
+            </div>
+            <div class="search-text-pane">
+              <div>
+                <div class="search-kicker">Keyword 02 &middot; M23 actor</div>
+                <div class="search-q"><code>&quot;FDLR&quot; (congo)</code></div>
+                <div class="search-handle">@pascal_mulegwa &middot; Mar 14, 2025 &middot; 40K views</div>
+                <p class="search-body">A Kinshasa journalist shares a DRC Minister of Trade clip on German broadcaster DW. His argument: the FDLR Rwanda claims to be pursuing are a pretext. What Rwanda is actually pursuing are the minerals &mdash; coltan, gold, cassiterite &mdash; feeding into Rwanda&rsquo;s national budget.</p>
+                <p class="search-proximity">The FDLR was the covert network&rsquo;s primary framing device across all four waves. This post &mdash; the counterclaim the network was working against &mdash; was at 40K views in the same week Wave 3 activated.</p>
+              </div>
+            </div>
+          </div>
+          <div class="search-slide">
+            <div class="search-img-pane">
+              <img src="assets/search-3.jpg" alt="Search result for Banyamulenge keyword." class="search-img-zoom" />
+            </div>
+            <div class="search-text-pane">
+              <div>
+                <div class="search-kicker">Keyword 03 &middot; Rwanda / covert network actor</div>
+                <div class="search-q"><code>Banyamulenge</code></div>
+                <div class="search-handle">@MaishaRdc &middot; Feb 1, 2025 &middot; 60K views</div>
+                <p class="search-body">A hate-speech monitoring account reports the alleged killing of a Banyamulenge FARDC officer by his own comrades on grounds of Tutsi ethnicity. The post tags international actors and embassies, situating the case in a broader pattern since 2021.</p>
+                <p class="search-proximity">The Banyamulenge-as-persecuted-minority frame was Narrative 2 of the covert network. This keyword already carried that narrative at 60K views before the network&rsquo;s own posts arrived. The network was not inventing a story. It was amplifying a frame that already had traction.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="search-slide">
-        <figure>
-          <img src="assets/search-3.jpg" alt="Search result for Banyamulenge keyword." />
-          <figcaption>
-            <span class="search-q">Query: <code>Banyamulenge</code></span>
-            <span class="search-handle">@MaishaRdc &middot; Feb 1, 2025 &middot; 60K views</span>
-            A hate-speech monitoring account reports the alleged killing of a Banyamulenge FARDC officer by his own comrades on grounds of Tutsi ethnicity.
-          </figcaption>
-        </figure>
+      <div class="search-car-controls">
+        <div class="search-car-dots">
+          <button class="search-car-dot active" data-go="0" aria-label="Slide 1"></button>
+          <button class="search-car-dot" data-go="1" aria-label="Slide 2"></button>
+          <button class="search-car-dot" data-go="2" aria-label="Slide 3"></button>
+        </div>
+        <span class="search-car-counter" id="srCounter">1 / 3</span>
+        <div class="search-car-nav">
+          <button class="search-car-btn" id="srPrev" type="button">&larr; Prev</button>
+          <button class="search-car-btn" id="srNext" type="button">Next &rarr;</button>
+        </div>
       </div>
     </div>
   </div>
@@ -689,6 +717,80 @@
   window.addEventListener('scroll', check, { passive: true });
   window.addEventListener('resize', check);
   check();
+})();
+
+// Search screenshot lightbox
+(function() {
+  var imgs = document.querySelectorAll('.search-img-zoom');
+  if (!imgs.length) return;
+  var overlay = document.getElementById('searchLightbox');
+  if (!overlay) return;
+  var img = document.getElementById('searchLightboxImg');
+  var caption = document.getElementById('searchLightboxCaption');
+  imgs.forEach(function(el) {
+    el.addEventListener('click', function() {
+      img.src = el.src;
+      img.alt = el.alt;
+      caption.textContent = el.alt.replace(/^Search result for /, '').replace(/\.$/, '');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay || e.target === img || e.target === caption) {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+})();
+</script>
+
+<div class="search-lightbox" id="searchLightbox" role="dialog" aria-modal="true" aria-label="Enlarged search result screenshot">
+  <div class="search-lightbox-inner">
+    <img id="searchLightboxImg" alt="" />
+    <div class="search-lightbox-caption" id="searchLightboxCaption"></div>
+    <button class="search-lightbox-close" type="button" aria-label="Close">&times;</button>
+  </div>
+</div>
+<script>
+// Search screenshot lightbox
+(function() {
+  var imgs = document.querySelectorAll('.search-img-zoom');
+  if (!imgs.length) return;
+  var overlay = document.getElementById('searchLightbox');
+  if (!overlay) return;
+  var img = document.getElementById('searchLightboxImg');
+  var caption = document.getElementById('searchLightboxCaption');
+  var closeBtn = document.querySelector('.search-lightbox-close');
+  function open(el) {
+    img.src = el.src;
+    img.alt = el.alt;
+    caption.textContent = el.alt.replace(/^Search result for /, '').replace(/\.$/, '');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  imgs.forEach(function(el) {
+    el.addEventListener('click', function() { open(el); });
+  });
+  function close() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay || e.target === img || e.target === caption) {
+      close();
+    }
+  });
+  if (closeBtn) closeBtn.addEventListener('click', close);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') close();
+  });
 })();
 </script>
 </body>
