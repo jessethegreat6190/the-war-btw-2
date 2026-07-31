@@ -25,7 +25,9 @@ html {
   --alt-bg: #f0eeeb;
   --body: 'Noto Serif', Georgia, serif;
   --sans: 'Libre Franklin', system-ui, sans-serif;
-  --display: 'Playfair Display', Georgia, serif;
+  --display: 'Archivo Black', 'Arial Black', sans-serif;
+  --deck: 'Source Serif 4', Georgia, serif;
+  --ui: 'Inter', system-ui, sans-serif;
   --mono: 'Courier Prime', 'IBM Plex Mono', monospace;
   --col: 680px;
   --col-editorial: 720px;
@@ -90,9 +92,9 @@ a:hover { text-decoration-color: var(--red); }
 }
 
 .section-heading {
-  font-family: var(--body);
+  font-family: var(--display);
   font-size: clamp(1.7rem, 3.5vw, 2.4rem);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.15;
   letter-spacing: -.02em;
   color: var(--ink);
@@ -535,9 +537,9 @@ figcaption {
 }
 
 .hero-title {
-  font-family: var(--body);
+  font-family: var(--display);
   font-size: clamp(2.8rem, 7vw, 6rem);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 0.9;
   letter-spacing: -.02em;
   color: #fff;
@@ -550,7 +552,7 @@ figcaption {
 }
 
 .hero-subtitle {
-  font-family: var(--body);
+  font-family: var(--deck);
   font-size: clamp(1.05rem, 2vw, 1.25rem);
   line-height: 1.65;
   color: rgba(255,255,255,0.75);
@@ -610,10 +612,10 @@ figcaption {
 
 .stat-value {
   display: block;
-  font-family: var(--mono);
+  font-family: var(--ui);
   font-size: 28px;
-  font-weight: 500;
-  line-height: 1;
+  font-weight: 700;
+  line-height: 1.1;
   color: var(--ink);
   margin-bottom: 4px;
 }
@@ -622,10 +624,10 @@ figcaption {
 
 .stat-label {
   display: block;
-  font-family: var(--sans);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  font-family: var(--ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-4);
 }
@@ -660,7 +662,7 @@ figcaption {
 .opening-heading {
   font-family: var(--display);
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.3;
   color: var(--ink);
 }
@@ -1061,9 +1063,9 @@ figcaption {
 }
 
 .ops-heading {
-  font-family: var(--body);
+  font-family: var(--display);
   font-size: clamp(1.3rem, 2.5vw, 1.7rem);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.15;
   color: var(--ink);
   margin-top: 8px;
@@ -1215,9 +1217,9 @@ figcaption {
 }
 
 .dc-subhead {
-  font-family: var(--body);
+  font-family: var(--display);
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--ink);
 }
 
