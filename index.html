@@ -685,10 +685,13 @@
 (function() {
   var track = document.getElementById('evTrack');
   if (!track) return;
+  var wrap = track.parentElement;
   var cards = track.querySelectorAll('.ev-card');
   var prevBtn = document.getElementById('evPrev');
   var nextBtn = document.getElementById('evNext');
   var current = 0;
+  var interval = null;
+  var PAUSE = 3200;
   function scrollTo(index) {
     if (index < 0) index = cards.length - 1;
     if (index >= cards.length) index = 0;
@@ -698,9 +701,29 @@
       c.classList.toggle('ev-card-active', i === index);
     });
   }
-  if (prevBtn) prevBtn.addEventListener('click', function() { scrollTo(current - 1); });
-  if (nextBtn) nextBtn.addEventListener('click', function() { scrollTo(current + 1); });
+  function next() { scrollTo(current + 1); }
+  function start() {
+    if (interval || cards.length < 2) return;
+    interval = setInterval(next, PAUSE);
+  }
+  function stop() {
+    if (interval) { clearInterval(interval); interval = null; }
+  }
+  if (prevBtn) prevBtn.addEventListener('click', function() { stop(); scrollTo(current - 1); start(); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { stop(); scrollTo(current + 1); start(); });
   if (cards.length > 0) cards[0].classList.add('ev-card-active');
+  wrap.addEventListener('mouseenter', stop);
+  wrap.addEventListener('mouseleave', start);
+  wrap.addEventListener('touchstart', stop, { passive: true });
+  document.addEventListener('visibilitychange', function() { document.hidden ? stop() : start(); });
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) { entry.isIntersecting ? start() : stop(); });
+    }, { threshold: 0.3 });
+    obs.observe(wrap);
+  } else {
+    start();
+  }
 })();
 
 // Reveal scroll animation
