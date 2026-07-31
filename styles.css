@@ -80,6 +80,15 @@ a:hover { text-decoration-color: var(--red); }
   color: var(--red);
 }
 
+.kicker {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
 .section-heading {
   font-family: var(--body);
   font-size: clamp(1.7rem, 3.5vw, 2.4rem);
@@ -518,9 +527,12 @@ figcaption {
   position: relative;
 }
 
-.hero-text { max-width: 650px; }
+.hero-text { max-width: 720px; margin: 0 auto; text-align: center; }
 
-.hero-eyebrow { color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+.hero-kicker {
+  color: var(--red);
+  margin: 0 0 24px;
+}
 
 .hero-title {
   font-family: var(--body);
@@ -530,7 +542,6 @@ figcaption {
   letter-spacing: -.02em;
   color: #fff;
   margin-bottom: 24px;
-  max-width: 650px;
 }
 
 .hero-em {
@@ -543,31 +554,32 @@ figcaption {
   font-size: clamp(1.05rem, 2vw, 1.25rem);
   line-height: 1.65;
   color: rgba(255,255,255,0.75);
-  margin-bottom: 24px;
+  margin: 0 auto 24px;
   max-width: 560px;
 }
 
 .hero-byline {
   border-top: 1px solid rgba(255,255,255,0.12);
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-  padding: 16px 0;
-  margin-bottom: 24px;
+  padding: 16px 0 0;
+  margin: 0 auto 8px;
+  max-width: 560px;
 }
 
 .hero-byline-label {
   font-family: var(--sans);
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 400;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.5);
 }
 
-.hero-byline-meta {
+.hero-byline-support {
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: 11px;
+  font-style: italic;
   color: rgba(255,255,255,0.4);
-  margin-top: 2px;
+  margin: 0 auto 24px;
 }
 
 .hero-cta {
