@@ -365,3 +365,32 @@
 
   window.addEventListener('resize', function () { track.style.transform = 'translateX(-' + (cur * 100) + '%)'; });
 })();
+
+/* ---- Data center bar animation ---- */
+(function () {
+  var bars = document.querySelector('.dc-bars');
+  if (!bars) return;
+  var fills = bars.querySelectorAll('.dc-bar-fill');
+  if (!fills.length) return;
+  var done = false;
+
+  function animate() {
+    if (done) return;
+    done = true;
+    fills.forEach(function (fill) {
+      var w = parseFloat(fill.getAttribute('data-width'));
+      if (!isNaN(w)) fill.style.width = w + '%';
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { animate(); obs.disconnect(); }
+      });
+    }, { threshold: 0.3 });
+    obs.observe(bars);
+  } else {
+    animate();
+  }
+})();
