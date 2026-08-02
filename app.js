@@ -394,3 +394,95 @@
     animate();
   }
 })();
+
+/* ---- Operations per year chart ---- */
+(function () {
+  var data = window.TWB && window.TWB.operationsPerYear;
+  var plot = document.getElementById('yrPlot');
+  var axis = document.getElementById('yrXAxis');
+  if (!data || !data.length || !plot || !axis) return;
+
+  var Y_MIN = 1998;
+  var Y_MAX = 2026;
+  var Y_MAX_VAL = 10;
+  var AXIS_TICKS = [0, 2, 4, 6, 8, 10];
+  var YEAR_TICKS = [1998, 1999, 2015, 2017, 2020, 2023, 2026];
+  var ACCEL_YEAR = 2016;
+
+  function x(year) { return ((year - Y_MIN) / (Y_MAX - Y_MIN)) * 100; }
+  function h(count) { return (count / Y_MAX_VAL) * 100; }
+
+  AXIS_TICKS.forEach(function (v) {
+    var top = (1 - v / Y_MAX_VAL) * 100;
+    var line = document.createElement('div');
+    line.className = 'yr-gridline';
+    line.style.top = top + '%';
+    plot.appendChild(line);
+
+    var label = document.createElement('div');
+    label.className = 'yr-ylabel';
+    label.style.top = top + '%';
+    label.textContent = v;
+    plot.appendChild(label);
+  });
+
+  var barsEl = document.createElement('div');
+  barsEl.className = 'yr-bars';
+  plot.appendChild(barsEl);
+
+  var bars = [];
+  data.forEach(function (d) {
+    var left = x(d.year);
+    var bar = document.createElement('div');
+    bar.className = 'yr-bar';
+    bar.style.left = left + '%';
+    bar.setAttribute('data-h', h(d.count) + '%');
+    barsEl.appendChild(bar);
+
+    var val = document.createElement('div');
+    val.className = 'yr-bar-val';
+    val.textContent = d.count;
+    bar.appendChild(val);
+
+    bars.push(bar);
+  });
+
+  YEAR_TICKS.forEach(function (year) {
+    var tick = document.createElement('div');
+    tick.className = 'yr-xtick';
+    tick.style.left = x(year) + '%';
+    tick.textContent = year;
+    axis.appendChild(tick);
+  });
+
+  var marker = document.createElement('div');
+  marker.className = 'yr-marker';
+  marker.style.left = x(ACCEL_YEAR) + '%';
+  barsEl.appendChild(marker);
+
+  var markerLbl = document.createElement('div');
+  markerLbl.className = 'yr-marker-lbl';
+  markerLbl.style.left = x(ACCEL_YEAR) + '%';
+  markerLbl.textContent = 'Acceleration begins';
+  barsEl.appendChild(markerLbl);
+
+  var done = false;
+  function animate() {
+    if (done) return;
+    done = true;
+    bars.forEach(function (bar) {
+      bar.style.height = bar.getAttribute('data-h');
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { animate(); obs.disconnect(); }
+      });
+    }, { threshold: 0.3 });
+    obs.observe(plot);
+  } else {
+    animate();
+  }
+})();
