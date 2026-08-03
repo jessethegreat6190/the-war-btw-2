@@ -655,13 +655,25 @@ figcaption {
 /* Hero */
 .hero {
   position: relative;
-  overflow: hidden;
-  padding: 112px 0 88px;
+  padding: 0 0 88px;
   color: var(--ink);
 }
 
 @media (min-width: 768px) {
-  .hero { padding: 168px 0 128px; }
+  .hero { padding: 0 0 128px; }
+}
+
+.hero-photo {
+  display: block;
+  margin: 0 0 64px;
+}
+
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: cover;
 }
 
 .hero-inner {
