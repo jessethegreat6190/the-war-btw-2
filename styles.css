@@ -1783,7 +1783,7 @@ figcaption {
 }
 
 .report-section {
-  margin-bottom: 56px;
+  margin: 80px 0 100px;
 }
 
 .report-h3 {
@@ -1876,8 +1876,8 @@ figcaption {
 
 .report-rule {
   border: 0;
-  border-top: 1px solid var(--rule-lt);
-  margin: 56px 0;
+  border-top: 1px solid rgb(34, 34, 34);
+  margin: 0;
 }
 
 @media (max-width: 640px) {
