@@ -214,10 +214,6 @@
         <div class="section-eyebrow">02 Evidence</div>
         <h2 id="evidence-title" class="section-heading">Posts from the dataset</h2>
       </div>
-      <div class="ev-nav">
-        <button type="button" class="ev-nav-btn" id="evPrev" aria-label="Previous evidence item">&larr;</button>
-        <button type="button" class="ev-nav-btn" id="evNext" aria-label="Next evidence item">&rarr;</button>
-      </div>
     </div>
     <div class="ev-track-wrap">
       <div class="ev-track" id="evTrack">
@@ -287,6 +283,13 @@
           </div>
         </article>
       </div>
+    </div>
+    <div class="ev-dots" id="evDots">
+      <button type="button" class="ev-dot active" data-go="0" aria-label="Go to evidence item 1"></button>
+      <button type="button" class="ev-dot" data-go="1" aria-label="Go to evidence item 2"></button>
+      <button type="button" class="ev-dot" data-go="2" aria-label="Go to evidence item 3"></button>
+      <button type="button" class="ev-dot" data-go="3" aria-label="Go to evidence item 4"></button>
+      <button type="button" class="ev-dot" data-go="4" aria-label="Go to evidence item 5"></button>
     </div>
     <p class="ev-caption">Selected posts from the dataset, each revealing a different operation's signature.</p>
   </div>
@@ -1046,11 +1049,15 @@
   if (!track) return;
   var wrap = track.parentElement;
   var cards = track.querySelectorAll('.ev-card');
-  var prevBtn = document.getElementById('evPrev');
-  var nextBtn = document.getElementById('evNext');
+  var dots = track.parentElement.parentElement.querySelectorAll('.ev-dot');
   var current = 0;
   var interval = null;
   var PAUSE = 2400;
+  function setDots() {
+    dots.forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+  }
   function scrollTo(index) {
     if (index < 0) index = cards.length - 1;
     if (index >= cards.length) index = 0;
@@ -1059,6 +1066,7 @@
     cards.forEach(function(c, i) {
       c.classList.toggle('ev-card-active', i === index);
     });
+    setDots();
   }
   function next() { scrollTo(current + 1); }
   function start() {
@@ -1068,8 +1076,13 @@
   function stop() {
     if (interval) { clearInterval(interval); interval = null; }
   }
-  if (prevBtn) prevBtn.addEventListener('click', function() { stop(); scrollTo(current - 1); start(); });
-  if (nextBtn) nextBtn.addEventListener('click', function() { stop(); scrollTo(current + 1); start(); });
+  dots.forEach(function(d) {
+    d.addEventListener('click', function() {
+      stop();
+      scrollTo(parseInt(d.getAttribute('data-go'), 10));
+      start();
+    });
+  });
   if (cards.length > 0) cards[0].classList.add('ev-card-active');
   wrap.addEventListener('mouseenter', stop);
   wrap.addEventListener('mouseleave', start);

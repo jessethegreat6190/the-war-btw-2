@@ -1104,28 +1104,27 @@ figcaption {
   margin-bottom: 32px;
 }
 
-.ev-nav { display: flex; gap: 8px; flex: none; }
-
-.ev-nav-btn {
-  width: 52px;
-  height: 52px;
+.ev-dots {
   display: flex;
-  align-items: center;
   justify-content: center;
-  border: 1px solid var(--red);
-  border-radius: 50%;
-  background: #fff;
-  color: var(--red);
-  cursor: pointer;
-  transition: border-color .15s, color .15s, background .15s;
-  font-size: 20px;
+  gap: 10px;
+  margin-top: 24px;
 }
 
-.ev-nav-btn:hover {
-  border-color: var(--red);
-  color: var(--red);
-  background: rgba(192,57,43,0.06);
+.ev-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(192,57,43,0.25);
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+  padding: 0;
 }
+
+.ev-dot:hover { background: rgba(192,57,43,0.5); }
+
+.ev-dot.active { background: var(--red); }
 
 .ev-track-wrap {
   overflow-x: auto;
