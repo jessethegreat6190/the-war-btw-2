@@ -247,6 +247,39 @@
 
     var ctx = document.getElementById('chartTimeline');
     if (ctx) {
+      var KEY_EVENTS = [
+        { day: 25, label: 'Goma falls' },
+        { day: 46, label: 'Bukavu falls' },
+        { day: 54, label: 'EU vote postponed' },
+        { day: 68, label: 'Minembwe strike' },
+        { day: 75, label: 'EU sanctions' },
+      ];
+      var eventMarkers = {
+        id: 'eventMarkers',
+        afterDraw: function (chart) {
+          var xs = chart.scales.x;
+          var ys = chart.scales.y;
+          var c = chart.ctx;
+          if (!xs || !ys) return;
+          c.save();
+          c.font = "600 9px 'Libre Franklin', system-ui, sans-serif";
+          KEY_EVENTS.forEach(function (ev) {
+            var px = xs.getPixelForValue(ev.day - 2);
+            c.strokeStyle = 'rgba(245,242,234,0.22)';
+            c.setLineDash([3, 3]);
+            c.beginPath();
+            c.moveTo(px, ys.top + 14);
+            c.lineTo(px, ys.bottom);
+            c.stroke();
+            c.setLineDash([]);
+            c.fillStyle = 'rgba(245,242,234,0.6)';
+            c.textAlign = 'center';
+            c.fillText(ev.label.toUpperCase(), px, ys.top + 9);
+          });
+          c.restore();
+        },
+      };
+
       new Chart(ctx, {
         type: 'line',
         data: {
@@ -256,7 +289,7 @@
               label: 'Covert network',
               data: cd.covert,
               borderColor: RED,
-              backgroundColor: 'rgba(192,57,43,0.06)',
+              backgroundColor: 'rgba(192,57,43,0.10)',
               borderWidth: 2.5,
               pointRadius: 0,
               pointHoverRadius: 4,
@@ -296,6 +329,7 @@
             },
           ],
         },
+        plugins: [eventMarkers],
         options: {
           responsive: true,
           maintainAspectRatio: false,
@@ -303,14 +337,14 @@
           plugins: {
             legend: {
               position: 'bottom',
-              labels: { font: { family: UI_FONT, size: 11 }, color: '#2e2e2e', padding: 16, usePointStyle: true, pointStyle: 'line' },
+              labels: { font: { family: UI_FONT, size: 11 }, color: '#f5f2ea', padding: 16, usePointStyle: true, pointStyle: 'line' },
             },
             tooltip: {
-              backgroundColor: '#fff',
-              borderColor: '#e0ddd5',
+              backgroundColor: '#1c1a14',
+              borderColor: 'rgba(255,255,255,0.15)',
               borderWidth: 1,
-              titleColor: '#1a1a1a',
-              bodyColor: '#2e2e2e',
+              titleColor: '#f5f2ea',
+              bodyColor: 'rgba(245,242,234,0.85)',
               padding: 12,
               cornerRadius: 4,
               titleFont: { family: UI_FONT, size: 12, weight: '600' },
@@ -320,13 +354,13 @@
           scales: {
             x: {
               grid: { display: false },
-              ticks: { font: { family: UI_FONT, size: 10 }, color: '#7a7a7a', maxTicksLimit: 12, maxRotation: 45 },
+              ticks: { font: { family: UI_FONT, size: 10 }, color: 'rgba(245,242,234,0.55)', maxTicksLimit: 12, maxRotation: 45 },
             },
             y: {
               beginAtZero: true,
               max: 150,
-              ticks: { stepSize: 50, font: { family: UI_FONT, size: 10 }, color: '#7a7a7a' },
-              grid: { color: 'rgba(0,0,0,0.06)' },
+              ticks: { stepSize: 50, font: { family: UI_FONT, size: 10 }, color: 'rgba(245,242,234,0.55)' },
+              grid: { color: 'rgba(255,255,255,0.08)' },
             },
           },
         },
@@ -395,94 +429,4 @@
   }
 })();
 
-/* ---- Operations per year chart ---- */
-(function () {
-  var data = window.TWB && window.TWB.operationsPerYear;
-  var plot = document.getElementById('yrPlot');
-  var axis = document.getElementById('yrXAxis');
-  if (!data || !data.length || !plot || !axis) return;
-
-  var Y_MIN = 1998;
-  var Y_MAX = 2026;
-  var Y_MAX_VAL = 10;
-  var AXIS_TICKS = [0, 2, 4, 6, 8, 10];
-  var YEAR_TICKS = [1998, 1999, 2015, 2017, 2020, 2023, 2026];
-  var ACCEL_YEAR = 2016;
-
-  function x(year) { return ((year - Y_MIN) / (Y_MAX - Y_MIN)) * 100; }
-  function h(count) { return (count / Y_MAX_VAL) * 100; }
-
-  AXIS_TICKS.forEach(function (v) {
-    var top = (1 - v / Y_MAX_VAL) * 100;
-    var line = document.createElement('div');
-    line.className = 'yr-gridline';
-    line.style.top = top + '%';
-    plot.appendChild(line);
-
-    var label = document.createElement('div');
-    label.className = 'yr-ylabel';
-    label.style.top = top + '%';
-    label.textContent = v;
-    plot.appendChild(label);
-  });
-
-  var barsEl = document.createElement('div');
-  barsEl.className = 'yr-bars';
-  plot.appendChild(barsEl);
-
-  var bars = [];
-  data.forEach(function (d) {
-    var left = x(d.year);
-    var bar = document.createElement('div');
-    bar.className = 'yr-bar';
-    bar.style.left = left + '%';
-    bar.setAttribute('data-h', h(d.count) + '%');
-    barsEl.appendChild(bar);
-
-    var val = document.createElement('div');
-    val.className = 'yr-bar-val';
-    val.textContent = d.count;
-    bar.appendChild(val);
-
-    bars.push(bar);
-  });
-
-  YEAR_TICKS.forEach(function (year) {
-    var tick = document.createElement('div');
-    tick.className = 'yr-xtick';
-    tick.style.left = x(year) + '%';
-    tick.textContent = year;
-    axis.appendChild(tick);
-  });
-
-  var marker = document.createElement('div');
-  marker.className = 'yr-marker';
-  marker.style.left = x(ACCEL_YEAR) + '%';
-  barsEl.appendChild(marker);
-
-  var markerLbl = document.createElement('div');
-  markerLbl.className = 'yr-marker-lbl';
-  markerLbl.style.left = x(ACCEL_YEAR) + '%';
-  markerLbl.textContent = 'Acceleration begins';
-  barsEl.appendChild(markerLbl);
-
-  var done = false;
-  function animate() {
-    if (done) return;
-    done = true;
-    bars.forEach(function (bar) {
-      bar.style.height = bar.getAttribute('data-h');
-    });
-  }
-
-  if ('IntersectionObserver' in window) {
-    var obs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) { animate(); obs.disconnect(); }
-      });
-    }, { threshold: 0.3 });
-    obs.observe(plot);
-  } else {
-    animate();
-  }
-})();
+/* ---- Operations per year chart (removed: format repurposed to the timeline) ---- */

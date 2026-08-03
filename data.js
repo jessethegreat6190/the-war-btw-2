@@ -82,19 +82,5 @@ window.TWB = (function () {
     eventDays: [25, 50, 54, 68, 75]
   };
 
-  var operationsPerYear = [
-    { year: 1998, count: 1 },
-    { year: 1999, count: 1 },
-    { year: 2004, count: 1 },
-    { year: 2010, count: 1 },
-    { year: 2015, count: 2 },
-    { year: 2017, count: 5 },
-    { year: 2020, count: 3 },
-    { year: 2023, count: 3 },
-    { year: 2024, count: 9 },
-    { year: 2025, count: 2 },
-    { year: 2026, count: 2 }
-  ];
-
-  return { chartData, TIMELINE_CATEGORIES, operationsPerYear };
+  return { chartData, TIMELINE_CATEGORIES };
 })();
