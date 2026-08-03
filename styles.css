@@ -702,7 +702,7 @@ figcaption {
 .hero-em {
   font-family: var(--deck);
   font-style: italic;
-  font-weight: 400;
+  font-weight: 500;
   color: #c0392b;
 }
 
