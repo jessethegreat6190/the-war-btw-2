@@ -20,9 +20,9 @@ html {
   --rule: #c0392b;
   --rule-lt: #e0ddd5;
   --rule-vlite: rgba(0,0,0,0.08);
-  --paper: #fdfaf6;
-  --paper-2: #f8f7f3;
-  --alt-bg: #f0eeeb;
+  --paper: #EAE8D8;
+  --paper-2: #F4F2EC;
+  --alt-bg: #D5D2C4;
   --body: 'Noto Serif', Georgia, serif;
   --sans: 'Libre Franklin', system-ui, sans-serif;
   --display: 'Archivo Black', 'Arial Black', sans-serif;
@@ -558,7 +558,7 @@ figcaption {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(253,250,246,0.95);
+  background: rgba(234,232,216,0.95);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--rule-vlite);
 }
@@ -1520,7 +1520,7 @@ figcaption {
   transition: background .15s;
 }
 
-.dc-table tbody tr:nth-child(odd) { background: rgba(248,247,243,0.6); }
+.dc-table tbody tr:nth-child(odd) { background: rgba(244,242,236,0.6); }
 .dc-table tbody tr:nth-child(even) { background: #fff; }
 .dc-table tbody tr:hover { background: #fff; }
 
