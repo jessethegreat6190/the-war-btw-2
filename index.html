@@ -1114,10 +1114,17 @@
 // Always start at the top on load
 (function() {
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  if (window.location.hash) {
-    history.replaceState(null, '', window.location.pathname + window.location.search);
-  }
-  window.scrollTo(0, 0);
+  var cleanHash = function() {
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  };
+  var toTop = function() { window.scrollTo(0, 0); };
+  cleanHash();
+  toTop();
+  window.addEventListener('load', function() { cleanHash(); toTop(); });
+  window.addEventListener('pageshow', function(e) { if (e.persisted) toTop(); });
+  window.setTimeout(toTop, 100);
 })();
 
 // Search screenshot lightbox
