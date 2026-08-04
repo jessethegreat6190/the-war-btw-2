@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&family=Courier+Prime:wght@400;700&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260804x" />
+  <link rel="stylesheet" href="styles.css?v=20260804y" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
   <noscript>
     <style>.reveal, .reveal-top { opacity: 1; transform: none; }</style>
@@ -865,29 +865,30 @@
           <p class="report-h4">Behavioural Evidence of Coordination</p>
           <p>The single strongest coordination signal is inter-post timing. Multiple accounts published their entire quarterly output within compressed windows of seconds to minutes, at rates exceeding plausible human composition. In several cases, multiple posts share identical timestamps to the second. These patterns are consistent with centrally prepared content distributed for rapid posting, either through manual copy-paste workflows or light automation.</p>
 
-          <table class="report-table">
-            <thead>
-              <tr><th>Handle</th><th>Posts</th><th>Window</th><th>Rate</th><th>Date</th><th>Hashtag</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>MooniPeter</td><td>10</td><td>11 seconds</td><td>55 posts/min</td><td>Mar 15</td><td>#TshisekediIsKilling</td></tr>
-              <tr><td>NKOTANYI1_</td><td>21</td><td>30 seconds</td><td>42 posts/min</td><td>Feb 28</td><td>#TshisekediAgainstPeace</td></tr>
-              <tr><td>FrancoisOb170520</td><td>20</td><td>2.6 minutes</td><td>7.6 posts/min</td><td>Feb 4</td><td>#TshisekediFDLR</td></tr>
-              <tr><td>umuzunguwashomy</td><td>10</td><td>2.1 minutes</td><td>4.7 posts/min</td><td>Mar 16</td><td>#TshisekediIsKilling</td></tr>
-              <tr><td>WAKASE__2</td><td>20</td><td>3.3 minutes</td><td>6.1 posts/min</td><td>Feb 5</td><td>#TshisekediFDLR</td></tr>
-              <tr><td>jeanpaulofficial</td><td>10</td><td>3.6 minutes</td><td>2.8 posts/min</td><td>Mar 15</td><td>#TshisekediIsKilling</td></tr>
-              <tr><td>TuyisengeD22748</td><td>28</td><td>7.8 minutes</td><td>3.6 posts/min</td><td>Feb 28</td><td>#TshisekediAgainstPeace</td></tr>
-              <tr><td>MCishakuri26676</td><td>16</td><td>7.8 minutes</td><td>2.1 posts/min</td><td>Feb 28</td><td>#TshisekediAgainstPeace</td></tr>
-              <tr><td>e_lucaton</td><td>20</td><td>9.8 minutes</td><td>2.0 posts/min</td><td>Feb 4</td><td>#TshisekediFDLR</td></tr>
-            </tbody>
-          </table>
-          <p class="report-caption">Table 3. Burst posting evidence. Each row represents one account&rsquo;s complete activity in a single sitting. Rates above 2 posts per minute are inconsistent with independent human composition.</p>
+          <div class="bar-chart" aria-label="Burst posting rates by account">
+            <div class="bar-row"><span>MooniPeter</span><strong style="--value: 36%">10 posts / 11 sec</strong></div>
+            <div class="bar-row"><span>NKOTANYI1_</span><strong style="--value: 75%">21 posts / 30 sec</strong></div>
+            <div class="bar-row"><span>FrancoisOb1705</span><strong style="--value: 71%">20 posts / 2.6 min</strong></div>
+            <div class="bar-row"><span>TuyisengeD22748</span><strong style="--value: 100%">28 posts / 7.8 min</strong></div>
+            <div class="bar-row"><span>human baseline</span><strong style="--value: 4%">~1 post / 90 sec</strong></div>
+            <div class="bar-row"><span>avg. human</span><strong style="--value: 4%">1 post / ~90 sec</strong></div>
+          </div>
+          <p class="report-caption">Figure 3. Burst posting evidence. Each bar represents one account&rsquo;s complete activity in a single sitting. Rates above 2 posts per minute are inconsistent with independent human composition.</p>
 
           <p>Two accounts additionally published posts that still carried the line numbers of the master document from which the content was copied. This is direct, content-level evidence that posts were drafted centrally, enumerated, and distributed to posting accounts. A master list running to at least 45 numbered entries implies a content volume substantially larger than what this collection captured for that wave. It implies that additional accounts posting from the same script likely exist outside the collection.</p>
           <p>Synchronised account activation reinforces the picture. On the morning of February 28, accounts NKOTANYI1_, TuyisengeD22748, MCishakuri26676, F_Hagenimana, BizimanaGratien and Saidi74224560 all began posting within a two-hour window (08:24 to 10:40 UTC), each producing 10 to 28 posts on the same hashtag pair (#TshisekediAgainstPeace #UNSecurityCouncil). A similar pattern occurred on March 15, when 25 accounts were active within a single day using #TshisekediIsKilling. Taken together, these behavioural patterns indicate an operation optimised not for audience engagement but for visibility at specific institutional targets. The combination of burst posting, synchronised activation, and centrally distributed messaging suggests a model designed to saturate hashtags at precise moments, particularly those aligned with diplomatic decision windows. This differs from conventional influence operations that seek to build reach or persuasion among broad publics. Instead, the observed activity is consistent with a form of <strong>decision-point targeting</strong>, in which volume and timing are used to insert specific narratives into the information streams monitored by international organisations. In this model, low engagement is not a failure condition but an expected outcome of a campaign oriented toward elite rather than mass audiences.</p>
 
           <p class="report-h4">Wave Structure: Four Campaigns Timed to Four Decisions</p>
           <p>The network did not post at a steady rate. Approximately 80 percent of its output falls within four short waves, each coinciding with a specific event in the diplomatic calendar. Across these waves, the lead hashtag rotates, a pattern consistent with campaign tasking organised in discrete phases rather than continuous activity.</p>
+
+          <div class="bar-chart" aria-label="Monthly escalation of conflict intensity">
+            <div class="bar-row"><span>Jan</span><strong style="--value: 18%">18%</strong></div>
+            <div class="bar-row"><span>Feb</span><strong style="--value: 34%">34%</strong></div>
+            <div class="bar-row"><span>Mar</span><strong style="--value: 52%">52%</strong></div>
+            <div class="bar-row"><span>Apr</span><strong style="--value: 67%">67%</strong></div>
+            <div class="bar-row"><span>May</span><strong style="--value: 81%">81%</strong></div>
+          </div>
+          <p class="report-caption">Figure 4. Monthly escalation of conflict intensity. The dispute was not about whether the grievances were real, but about what they justify.</p>
 
           <table class="report-table">
             <thead>
