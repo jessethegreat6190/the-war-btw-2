@@ -2086,7 +2086,7 @@ a:focus-visible {
   width: var(--value);
   min-width: 60px;
   max-width: 100%;
-  background: linear-gradient(90deg, var(--color-ink), #4c4b49);
+  background: var(--color-ink);
   color: #fff;
   border-radius: 999px;
   text-align: center;
