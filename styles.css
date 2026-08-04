@@ -275,7 +275,6 @@ a:focus-visible {
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--color-ink);
-  margin-top: 16px;
 }
 
 .hero-title em {
@@ -291,7 +290,7 @@ a:focus-visible {
   line-height: 1.65;
   color: var(--color-body);
   max-width: 560px;
-  margin: 20px auto 0;
+  margin: 0 auto;
 }
 
 .hero-byline {
@@ -299,13 +298,13 @@ a:focus-visible {
   margin: 0 auto;
   border-top: 1px solid var(--color-hairline);
   padding-top: 16px;
-  margin-top: 24px;
 }
 
 .byline-org {
   font-family: var(--font-display);
   font-size: 12px;
   font-weight: 400;
+  line-height: 1.25;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--color-stone);
@@ -316,6 +315,7 @@ a:focus-visible {
   font-family: var(--font-sans, "Libre Franklin", sans-serif);
   font-size: 12px;
   font-style: italic;
+  line-height: 1.25;
   color: var(--color-stone);
 }
 
@@ -352,7 +352,6 @@ a:focus-visible {
 
 @media (min-width: 768px) {
   .hero { padding-bottom: 128px; }
-  .hero-img { margin-bottom: 96px; }
 }
 
 /* Stats strip */
@@ -385,6 +384,7 @@ a:focus-visible {
   font-family: var(--font-ui);
   font-size: 30px;
   font-weight: 700;
+  line-height: 1.2;
   color: var(--color-ink);
 }
 
@@ -754,6 +754,7 @@ a:focus-visible {
   font-family: var(--font-display-alt);
   font-weight: 400;
   font-size: 1.5rem;
+  line-height: 1.333;
   color: var(--color-ink);
   margin-top: 8px;
 }
@@ -762,7 +763,7 @@ a:focus-visible {
   margin-top: 16px;
   max-width: 672px;
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.625;
   color: var(--color-body);
 }
 
@@ -794,6 +795,7 @@ a:focus-visible {
   font-family: var(--font-display-alt);
   font-weight: 400;
   font-size: 1.375rem;
+  line-height: 1.15;
   color: var(--color-ink);
   margin-top: 8px;
 }
@@ -801,7 +803,7 @@ a:focus-visible {
 .ops-desc {
   margin-top: 12px;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.625;
   color: var(--color-body);
 }
 
@@ -913,9 +915,8 @@ a:focus-visible {
 
 .dc-sub {
   margin-top: 8px;
-  max-width: 576px;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.625;
   color: var(--color-muted);
 }
 
@@ -1270,7 +1271,7 @@ a:focus-visible {
 .con-quote p {
   font-family: var(--font-body);
   font-size: 20px;
-  line-height: 1.7;
+  line-height: 1.625;
   font-style: italic;
   color: var(--color-ink);
 }
