@@ -197,17 +197,30 @@ a:focus-visible {
   display: none;
   align-items: center;
   gap: 24px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-muted);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-ink);
 }
 
 .mh-nav a {
   text-decoration: none;
   transition: color 150ms;
+  position: relative;
 }
 
-.mh-nav a:hover { color: var(--color-ink); }
+.mh-nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width 200ms var(--ease-out);
+}
+
+.mh-nav a:hover { color: var(--color-primary); }
+.mh-nav a:hover::after { width: 100%; }
 
 .mh-burger {
   display: flex;
