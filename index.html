@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&family=Courier+Prime:wght@400;700&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260804d" />
+  <link rel="stylesheet" href="styles.css?v=20260805a" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
   <noscript>
     <style>.reveal, .reveal-top { opacity: 1; transform: none; }</style>
@@ -338,33 +338,13 @@
           <div>
             <h4 class="ops-ev-heading">Feature: Burst posting</h4>
             <p class="ops-ev-text">Multiple accounts published their entire quarterly output in windows of seconds to minutes, in several cases with posts sharing the same timestamp to the second. The pattern is consistent with operators pasting from a prepared list against the posting interface, not composing independently.</p>
-            <div class="ops-bars">
-              <div class="ops-bar-row">
-                <span class="ops-bar-name">MooniPeter</span>
-                <div class="ops-bar-track"><div class="ops-bar-fill" data-w="100%"></div></div>
-                <span class="ops-bar-meta"><strong>10 posts</strong> 11 sec</span>
-              </div>
-              <div class="ops-bar-row">
-                <span class="ops-bar-name">NKOTANYI1_</span>
-                <div class="ops-bar-track"><div class="ops-bar-fill" data-w="76%"></div></div>
-                <span class="ops-bar-meta"><strong>21 posts</strong> 30 sec</span>
-              </div>
-              <div class="ops-bar-row">
-                <span class="ops-bar-name">FrancoisOb1705</span>
-                <div class="ops-bar-track"><div class="ops-bar-fill" data-w="14%"></div></div>
-                <span class="ops-bar-meta"><strong>20 posts</strong> 2.6 min</span>
-              </div>
-              <div class="ops-bar-row">
-                <span class="ops-bar-name">TuyisengeD22748</span>
-                <div class="ops-bar-track"><div class="ops-bar-fill" data-w="7%"></div></div>
-                <span class="ops-bar-meta"><strong>28 posts</strong> 7.8 min</span>
-              </div>
-              <div class="ops-bar-baseline">human baseline &middot; ~1 post per 90 sec</div>
-              <div class="ops-bar-row">
-                <span class="ops-bar-name ops-bar-human">avg. human</span>
-                <div class="ops-bar-track"><div class="ops-bar-fill ops-bar-human-fill" data-w="1.2%"></div></div>
-                <span class="ops-bar-meta ops-bar-human">1 post &middot; ~90 sec</span>
-              </div>
+            <div class="bar-chart" aria-label="Burst posting rates by account">
+              <div class="bar-row"><span>MooniPeter</span><strong style="--value: 100%">10 posts &middot; 11 sec</strong></div>
+              <div class="bar-row"><span>NKOTANYI1_</span><strong style="--value: 76%">21 posts &middot; 30 sec</strong></div>
+              <div class="bar-row"><span>FrancoisOb1705</span><strong style="--value: 14%">20 posts &middot; 2.6 min</strong></div>
+              <div class="bar-row"><span>TuyisengeD22748</span><strong style="--value: 7%">28 posts &middot; 7.8 min</strong></div>
+              <div class="bar-row"><span>human baseline</span><strong style="--value: 1.2%">~1 post per 90 sec</strong></div>
+              <div class="bar-row"><span>avg. human</span><strong style="--value: 1.2%">1 post &middot; ~90 sec</strong></div>
             </div>
             <p class="ops-ev-text ops-ev-note">For scale, a human pacing themselves could be expected to post roughly once every 90 seconds, meaning TuyisengeD22748&rsquo;s output alone would take roughly four and a half hours.</p>
           </div>
@@ -678,11 +658,6 @@
           <button type="button" class="sim-dot active" data-go="0" aria-label="Slide 1"></button>
           <button type="button" class="sim-dot" data-go="1" aria-label="Slide 2"></button>
           <button type="button" class="sim-dot" data-go="2" aria-label="Slide 3"></button>
-        </div>
-        <span class="sim-counter" id="simCounter">1 / 3</span>
-        <div class="sim-nav">
-          <button type="button" id="simPrev">&larr; Prev</button>
-          <button type="button" id="simNext">Next &rarr;</button>
         </div>
       </div>
     </div>

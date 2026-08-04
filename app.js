@@ -157,25 +157,17 @@
     var slides = track.children;
     if (!slides.length) return;
     var dots = Array.prototype.slice.call(document.querySelectorAll('#simDots .sim-dot'));
-    var counter = document.getElementById('simCounter');
-    var prev = document.getElementById('simPrev');
-    var next = document.getElementById('simNext');
     var i = 0;
 
     function go(n) {
       i = Math.max(0, Math.min(slides.length - 1, n));
       track.style.transform = 'translateX(-' + (i * 100) + '%)';
       dots.forEach(function (d, k) { d.classList.toggle('active', k === i); });
-      if (counter) counter.textContent = (i + 1) + ' / ' + slides.length;
-      if (prev) prev.disabled = i === 0;
-      if (next) next.disabled = i === slides.length - 1;
     }
 
     dots.forEach(function (d) {
       d.addEventListener('click', function () { go(parseInt(d.getAttribute('data-go'), 10)); });
     });
-    if (prev) prev.addEventListener('click', function () { go(i - 1); });
-    if (next) next.addEventListener('click', function () { go(i + 1); });
     go(0);
   })();
 
