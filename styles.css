@@ -184,11 +184,9 @@ a:focus-visible {
   letter-spacing: normal;
 }
 
-.mh-mark {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  background: var(--color-primary);
+.mh-mark-img {
+  width: auto;
+  height: 24px;
   flex: none;
 }
 
@@ -1276,12 +1274,14 @@ a:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 32px;
+  min-width: 0;
 }
 
 .dc-right {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-width: 0;
 }
 
 .dc-h3 {
@@ -1933,11 +1933,9 @@ a:focus-visible {
   letter-spacing: -0.02em;
 }
 
-.ft-mark {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  background: var(--color-primary);
+.ft-mark-img {
+  width: auto;
+  height: 24px;
   flex: none;
 }
 
