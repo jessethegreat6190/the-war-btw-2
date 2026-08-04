@@ -2077,7 +2077,7 @@ a:focus-visible {
 }
 
 .bar-row span {
-  color: var(--ink-4);
+  color: var(--color-muted);
   font-size: 0.82rem;
 }
 
@@ -2086,7 +2086,7 @@ a:focus-visible {
   width: var(--value);
   min-width: 42px;
   max-width: 100%;
-  background: linear-gradient(90deg, var(--ink), #4c4b49);
+  background: linear-gradient(90deg, var(--color-ink), #4c4b49);
   color: #fff;
   border-radius: 999px;
   text-align: center;
