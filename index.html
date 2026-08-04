@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Franklin:wght@400;600;700&family=Archivo+Black&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260804h" />
+  <link rel="stylesheet" href="styles.css?v=20260804j" />
 </head>
 <body>
 
@@ -266,6 +266,31 @@
           <div class="ops-evidence-block">
             <h4 class="ops-evidence-title">Alignment with the diplomatic calendar</h4>
             <p class="ops-evidence-text">The network posted in four discrete waves, each timed to an open institutional decision window. Drag the slider through the quarter to trace each spike against the event that triggered it.</p>
+            <div class="wave-chart-embed">
+              <h2 class="sr-only">Interactive timeline showing daily post volume from the covert anti-Tshisekedi network against key conflict and diplomatic events, January to March 2025.</h2>
+              <div class="wc-legend">
+                <span><span class="wc-swatch wc-swatch-covert"></span>Covert network</span>
+                <span><span class="wc-swatch wc-swatch-flooder"></span>Anti-Kagame flooder</span>
+                <span><span class="wc-swatch wc-swatch-state"></span>CongolaisTelema</span>
+                <span><span class="wc-swatch wc-swatch-organic"></span>Organic conversation</span>
+                <span><span class="wc-swatch wc-swatch-events"></span>Key events</span>
+              </div>
+              <div class="wc-canvas-wrap">
+                <canvas id="waveChart2" role="img" aria-label="Line chart showing daily post volume by campaign from January to March 2025 with four covert network spikes aligned to diplomatic events.">Four wave spikes: Wave 1 early Feb, Wave 2 late Feb, Wave 3 mid-March (largest, 121 posts on Mar 15), Wave 4 late March.</canvas>
+              </div>
+              <div class="wc-slider-row">
+                <span class="wc-axis">Jan 2</span>
+                <input type="range" id="waveSlider2" min="0" max="87" value="32" step="1" class="wc-range" aria-label="Scrub through timeline" />
+                <span class="wc-axis">Mar 30</span>
+                <span id="waveDateLabel2" class="wc-date">3 Feb</span>
+              </div>
+              <div id="waveEventPanel2" class="wc-panel">
+                <div id="wep2Date" class="wc-panel-date">Feb 3&ndash;6</div>
+                <div id="wep2Badge" class="wc-panel-badge">Wave 1</div>
+                <div id="wep2Title" class="wc-panel-title">#TshisekediFDLR surges</div>
+                <div id="wep2Body" class="wc-panel-body">First Lady Denise Nyakeru visits wounded FARDC soldiers at Camp Kokolo. The network reframes the visit as proof of FDLR collaboration &mdash; 143 posts, 12 accounts, @DeniseNyakeru tagged 28 times.</div>
+              </div>
+            </div>
           </div>
         </div>
       </article>
@@ -476,26 +501,20 @@
         </div>
         <div class="dc-bars-title">Total views &mdash; all posts combined</div>
         <div class="dc-bars">
-          <div class="dc-bar">
-            <div class="dc-bar-label">
-              <span style="color:#c0392b;">Covert network &middot; 612 posts</span>
-              <span>71,695</span>
-            </div>
-            <div class="dc-bar-track"><div class="dc-bar-fill" data-width="2.1" style="background:#c0392b;"></div></div>
+          <div class="dc-stat">
+            <span class="dc-stat-label" style="color:#8B2020;">Covert network &middot; 612 posts</span>
+            <span class="dc-stat-value" data-count="71695" style="color:#8B2020;">71,695</span>
+            <div class="dc-bar-track"><div class="dc-bar-fill" data-width="4.7" style="background:#8B2020;"></div></div>
           </div>
-          <div class="dc-bar">
-            <div class="dc-bar-label">
-              <span>Anti-Kagame flooder &middot; 152 posts</span>
-              <span>36,621</span>
-            </div>
-            <div class="dc-bar-track"><div class="dc-bar-fill" data-width="1.1" style="background:#a8a8a8;"></div></div>
+          <div class="dc-stat">
+            <span class="dc-stat-label" style="color:#8a6e1e;">Anti-Kagame flooder &middot; 152 posts</span>
+            <span class="dc-stat-value" data-count="36621" style="color:#8a6e1e;">36,621</span>
+            <div class="dc-bar-track"><div class="dc-bar-fill" data-width="2.4" style="background:#8a6e1e;"></div></div>
           </div>
-          <div class="dc-bar">
-            <div class="dc-bar-label">
-              <span>CongolaisTelema &middot; 336 posts</span>
-              <span>1,535,865</span>
-            </div>
-            <div class="dc-bar-track"><div class="dc-bar-fill" data-width="96.8" style="background:#1a1a1a;"></div></div>
+          <div class="dc-stat">
+            <span class="dc-stat-label" style="color:#2a5fa8;">CongolaisTelema &middot; 336 posts</span>
+            <span class="dc-stat-value" data-count="1535865" style="color:#2a5fa8;">1,535,865</span>
+            <div class="dc-bar-track"><div class="dc-bar-fill" data-width="100" style="background:#2a5fa8;"></div></div>
           </div>
         </div>
         <p class="dc-desc">The covert network produced 30% of all content in the dataset and captured 2.1% of its views.</p>
@@ -509,24 +528,6 @@
         <p class="dc-desc">Those numbers, read in isolation, produce the wrong conclusion. The covert network was not optimised for reach. It was optimised for placement at decision points.</p>
         <p class="dc-desc">The operation placed 181 posts in the mention feeds of @UN and @EUCouncil during the weeks those institutions were deciding on sanctions. Whether any of those posts was read, screenshotted, or cited cannot be established from platform data. What can be established is that the attempt was made, that it was timed with precision to institutional decision windows, and that it cost approximately nothing to run.</p>
       </div>
-    </div>
-
-    <!-- Chart -->
-    <hr class="section-rule" />
-    <div class="reveal chart-container">
-      <div class="chart-title">Posts per day, January&ndash;March 2025</div>
-      <div class="chart-desc">Interactive timeline showing daily post volume from the covert anti-Tshisekedi network against key conflict and diplomatic events, January to March 2025. Four streams of activity across three months: the covert network (red), a single anti-Kagame flooder (amber), the CongolaisTelema state campaign (blue), and organic discussion (grey). Key decision windows are marked. Drag the pointer across the graph or tap a key event below to inspect it.</div>
-      <div class="chart-box chart-box-dark" id="timelineBox">
-        <canvas id="chartTimeline"></canvas>
-        <div class="tl-pointer" id="tlPointer" aria-hidden="true">
-          <span class="tl-pointer-line"></span>
-          <span class="tl-pointer-dot"></span>
-          <span class="tl-pointer-date" id="tlPointerDate"></span>
-        </div>
-      </div>
-      <div class="chart-readout" id="tlReadout" aria-live="polite"></div>
-      <div class="tl-events" id="tlEvents" role="list" aria-label="Key events"></div>
-      <div class="chart-source">Source: Thraets investigation dataset &middot; 2,000+ posts analysed</div>
     </div>
 
   </div>

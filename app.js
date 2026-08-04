@@ -236,245 +236,158 @@
     draw();
   })();
 
-  /* ---- Chart ---- */
+  /* ---- Wave chart (Chart.js slider) ---- */
   if (typeof Chart !== 'undefined' && D.chartData) {
     var cd = D.chartData;
-    var RED = '#c0392b';
-    var AMBER = '#d28c28';
-    var BLUE = '#2a5fa8';
-    var GREY = '#7a7468';
-    var UI_FONT = "'Libre Franklin', system-ui, sans-serif";
-
-    var ctx = document.getElementById('chartTimeline');
+    var DAYS = cd.dates.length;
+    var ctx = document.getElementById('waveChart2');
     if (ctx) {
-      var KEY_EVENTS = cd.events.map(function (ev) {
-        return { day: ev.day, label: ev.label, badge: ev.badge, title: ev.title };
+      var keyEventDays = cd.eventDays || [];
+
+      var events = cd.events.map(function (ev) {
+        return {
+          day: ev.day,
+          label: ev.label,
+          badge: ev.badge,
+          title: ev.title,
+          body: ev.body,
+          accent: ev.accent || '#b0a99e'
+        };
       });
-      var eventMarkers = {
-        id: 'eventMarkers',
+
+      function dayLabel(i) {
+        var d = new Date(2025, 0, 2);
+        d.setDate(d.getDate() + i);
+        return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+      }
+
+      var scrubPlugin = {
+        id: 'scrub2',
         afterDraw: function (chart) {
-          var xs = chart.scales.x;
-          var ys = chart.scales.y;
+          var slider = document.getElementById('waveSlider2');
+          if (!slider) return;
+          var idx = parseInt(slider.value, 10);
+          var meta = chart.getDatasetMeta(0);
+          if (!meta.data[idx]) return;
+          var x = meta.data[idx].x;
+          var top = chart.chartArea.top;
+          var bottom = chart.chartArea.bottom;
           var c = chart.ctx;
-          if (!xs || !ys) return;
           c.save();
-          c.font = "600 9px 'Libre Franklin', system-ui, sans-serif";
-          KEY_EVENTS.forEach(function (ev) {
-            var px = xs.getPixelForValue(ev.day);
-            c.strokeStyle = 'rgba(245,242,234,0.22)';
-            c.setLineDash([3, 3]);
-            c.beginPath();
-            c.moveTo(px, ys.top + 14);
-            c.lineTo(px, ys.bottom);
-            c.stroke();
-            c.setLineDash([]);
-            c.fillStyle = 'rgba(245,242,234,0.6)';
-            c.textAlign = 'center';
-            c.fillText(ev.label.toUpperCase(), px, ys.top + 9);
-          });
+          c.beginPath();
+          c.setLineDash([3, 3]);
+          c.strokeStyle = 'rgba(139,32,32,0.6)';
+          c.lineWidth = 1.5;
+          c.moveTo(x, top);
+          c.lineTo(x, bottom);
+          c.stroke();
+          c.beginPath();
+          c.arc(x, top + 5, 4, 0, Math.PI * 2);
+          c.fillStyle = '#8B2020';
+          c.fill();
           c.restore();
-        },
+        }
       };
 
-      var timelineChart = new Chart(ctx, {
+      var evtPlugin = {
+        id: 'evtLines2',
+        afterDraw: function (chart) {
+          var meta = chart.getDatasetMeta(0);
+          var top = chart.chartArea.top;
+          var bottom = chart.chartArea.bottom;
+          var c = chart.ctx;
+          keyEventDays.forEach(function (day) {
+            if (!meta.data[day]) return;
+            var x = meta.data[day].x;
+            c.save();
+            c.beginPath();
+            c.setLineDash([4, 4]);
+            c.strokeStyle = 'rgba(176,169,158,0.5)';
+            c.lineWidth = 1;
+            c.moveTo(x, top);
+            c.lineTo(x, bottom);
+            c.stroke();
+            c.restore();
+          });
+        }
+      };
+
+      Chart.register(scrubPlugin, evtPlugin);
+
+      var chart = new Chart(ctx, {
         type: 'line',
         data: {
           labels: cd.dates,
           datasets: [
-            {
-              label: 'Covert network',
-              data: cd.covert,
-              borderColor: RED,
-              backgroundColor: 'rgba(192,57,43,0.10)',
-              borderWidth: 2.5,
-              pointRadius: 0,
-              pointHoverRadius: 4,
-              fill: true,
-              tension: 0.3,
-            },
-            {
-              label: 'Anti-Kagame flooder',
-              data: cd.flooder,
-              borderColor: AMBER,
-              borderWidth: 1.5,
-              borderDash: [4, 3],
-              pointRadius: 0,
-              pointHoverRadius: 4,
-              fill: false,
-              tension: 0.3,
-            },
-            {
-              label: 'CongolaisTelema',
-              data: cd.state,
-              borderColor: BLUE,
-              borderWidth: 1.5,
-              pointRadius: 0,
-              pointHoverRadius: 4,
-              fill: false,
-              tension: 0.3,
-            },
-            {
-              label: 'Organic',
-              data: cd.organic,
-              borderColor: GREY,
-              borderWidth: 1.5,
-              pointRadius: 0,
-              pointHoverRadius: 4,
-              fill: false,
-              tension: 0.3,
-            },
-          ],
+            { label: 'Covert network', data: cd.covert, borderColor: '#8B2020', borderWidth: 2.5, pointRadius: 0, tension: 0.3, fill: false },
+            { label: 'Flooder', data: cd.flooder, borderColor: '#8a6e1e', borderWidth: 1.5, pointRadius: 0, tension: 0.3, fill: false, borderDash: [4, 3] },
+            { label: 'State', data: cd.state, borderColor: '#2a5fa8', borderWidth: 1.5, pointRadius: 0, tension: 0.3, fill: false },
+            { label: 'Organic', data: cd.organic, borderColor: '#7a7468', borderWidth: 1.5, pointRadius: 0, tension: 0.3, fill: false }
+          ]
         },
-        plugins: [eventMarkers],
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          interaction: { mode: 'index', intersect: false },
-          plugins: {
-            legend: {
-              position: 'bottom',
-              labels: { font: { family: UI_FONT, size: 11 }, color: '#f5f2ea', padding: 16, usePointStyle: true, pointStyle: 'line' },
-            },
-            tooltip: {
-              backgroundColor: '#1c1a14',
-              borderColor: 'rgba(255,255,255,0.15)',
-              borderWidth: 1,
-              titleColor: '#f5f2ea',
-              bodyColor: 'rgba(245,242,234,0.85)',
-              padding: 12,
-              cornerRadius: 4,
-              titleFont: { family: UI_FONT, size: 12, weight: '600' },
-              bodyFont: { family: UI_FONT, size: 12 },
-            },
-          },
+          animation: false,
+          interaction: { mode: 'none' },
+          plugins: { legend: { display: false }, tooltip: { enabled: false } },
           scales: {
-            x: {
-              grid: { display: false },
-              ticks: { font: { family: UI_FONT, size: 10 }, color: 'rgba(245,242,234,0.55)', maxTicksLimit: 12, maxRotation: 45 },
-            },
-            y: {
-              beginAtZero: true,
-              max: 150,
-              ticks: { stepSize: 50, font: { family: UI_FONT, size: 10 }, color: 'rgba(245,242,234,0.55)' },
-              grid: { color: 'rgba(255,255,255,0.08)' },
-            },
-          },
-        },
+            x: { ticks: { maxTicksLimit: 8, color: '#7a7468', font: { size: 10 }, maxRotation: 0 }, grid: { color: 'rgba(212,207,198,0.3)' } },
+            y: { max: 150, min: 0, ticks: { color: '#7a7468', font: { size: 10 }, stepSize: 50 }, grid: { color: 'rgba(212,207,198,0.3)' }, title: { display: true, text: 'Posts per day', color: '#7a7468', font: { size: 10 } } }
+          }
+        }
       });
 
-      /* ---- Timeline pointer + readout ---- */
-      (function () {
-        var box = document.getElementById('timelineBox');
-        var pointer = document.getElementById('tlPointer');
-        var readout = document.getElementById('tlReadout');
-        var eventsWrap = document.getElementById('tlEvents');
-        if (!box || !pointer || !readout || !timelineChart) return;
+      function findEvent(day) {
+        var best = null;
+        var bestDist = 999;
+        events.forEach(function (ev) {
+          var dist = Math.abs(ev.day - day);
+          if (dist < bestDist) { bestDist = dist; best = ev; }
+        });
+        return bestDist <= 5 ? best : null;
+      }
 
-        var pointerDate = pointer.querySelector('.tl-pointer-date');
-        var dragging = false;
-
-        function nearestEvent(index) {
-          var best = null;
-          var bestDist = 1e9;
-          cd.events.forEach(function (ev) {
-            var d = Math.abs(ev.day - index);
-            if (d < bestDist) { bestDist = d; best = ev; }
-          });
-          return { event: best, dist: bestDist };
-        }
-
-        function dailyStats(index) {
-          return [
-            { label: 'Covert', v: cd.covert[index] || 0, c: RED },
-            { label: 'Flooder', v: cd.flooder[index] || 0, c: AMBER },
-            { label: 'State', v: cd.state[index] || 0, c: BLUE },
-            { label: 'Organic', v: cd.organic[index] || 0, c: GREY },
-          ];
-        }
-
-        function renderReadout(index) {
-          var near = nearestEvent(index);
-          var stats = dailyStats(index).map(function (s) {
-            return '<span class="ro-stat"><b style="color:' + s.c + '">' + s.v + '</b> ' + s.label + '</span>';
-          }).join('');
-          if (near.event && near.dist <= 2) {
-            var ev = near.event;
-            readout.innerHTML =
-              '<div class="ro-kicker">' + (ev.badge ? ev.badge + ' &middot; Key event' : 'Key event') + '</div>' +
-              '<div class="ro-date">' + ev.label + '</div>' +
-              '<div class="ro-title">' + ev.title + '</div>' +
-              '<div class="ro-body">' + ev.body + '</div>' +
-              '<div class="ro-stats">' + stats + '</div>';
-          } else {
-            readout.innerHTML =
-              '<div class="ro-kicker">Timeline &middot; ' + (cd.dates[index] || '') + '</div>' +
-              '<div class="ro-title">Daily stream activity</div>' +
-              '<div class="ro-body">Move the pointer across the graph to inspect posts per day, or select a key event below.</div>' +
-              '<div class="ro-stats">' + stats + '</div>';
+      function updatePanel(day) {
+        var dateLabel = document.getElementById('waveDateLabel2');
+        if (dateLabel) dateLabel.textContent = dayLabel(day);
+        var panel = document.getElementById('waveEventPanel2');
+        if (!panel) return;
+        var wepDate = document.getElementById('wep2Date');
+        var wepBadge = document.getElementById('wep2Badge');
+        var wepTitle = document.getElementById('wep2Title');
+        var wepBody = document.getElementById('wep2Body');
+        var ev = findEvent(day);
+        if (ev) {
+          if (wepDate) wepDate.textContent = ev.label;
+          if (ev.badge) {
+            if (wepBadge) {
+              wepBadge.textContent = ev.badge;
+              wepBadge.style.display = 'inline-block';
+            }
+          } else if (wepBadge) {
+            wepBadge.style.display = 'none';
           }
+          if (wepTitle) wepTitle.textContent = ev.title;
+          if (wepBody) wepBody.textContent = ev.body;
+          panel.style.borderLeftColor = ev.accent;
+        } else {
+          if (wepDate) wepDate.textContent = dayLabel(day);
+          if (wepBadge) wepBadge.style.display = 'none';
+          if (wepTitle) wepTitle.textContent = 'Quiet period';
+          if (wepBody) wepBody.textContent = 'The covert network was largely inactive here \u2014 baseline seeding posture, low volume, no institutional targeting. Activity between the waves reflects the cost of maintaining dormant accounts rather than any operational intent.';
+          panel.style.borderLeftColor = '#d4cfc6';
         }
+        if (chart) chart.update('none');
+      }
 
-        function renderChips() {
-          if (!eventsWrap) return;
-          eventsWrap.innerHTML = '';
-          cd.events.forEach(function (ev) {
-            var b = document.createElement('button');
-            b.type = 'button';
-            b.className = 'tl-chip';
-            b.setAttribute('data-day', ev.day);
-            b.innerHTML = (ev.badge ? '<span class="tl-chip-badge">' + ev.badge + '</span>' : '') + ev.label + ' &middot; ' + ev.title;
-            eventsWrap.appendChild(b);
-          });
-          eventsWrap.addEventListener('click', function (e) {
-            var chip = e.target.closest('.tl-chip');
-            if (chip) setPointer(parseInt(chip.getAttribute('data-day'), 10));
-          });
-        }
-
-        function setPointer(index) {
-          index = Math.max(0, Math.min(cd.dates.length - 1, index));
-          var area = timelineChart.chartArea;
-          if (!area) return;
-          var canvasRect = timelineChart.canvas.getBoundingClientRect();
-          var boxRect = box.getBoundingClientRect();
-          var px = timelineChart.scales.x.getPixelForValue(index);
-          pointer.style.left = (canvasRect.left - boxRect.left + px) + 'px';
-          pointer.style.top = (canvasRect.top - boxRect.top + area.top) + 'px';
-          pointer.style.height = (area.bottom - area.top) + 'px';
-          if (pointerDate) pointerDate.textContent = cd.dates[index] || '';
-          renderReadout(index);
-          if (eventsWrap) {
-            Array.prototype.forEach.call(eventsWrap.children, function (chip) {
-              chip.classList.toggle('active', parseInt(chip.getAttribute('data-day'), 10) === index);
-            });
-          }
-        }
-
-        function indexFromEvent(e) {
-          var canvasRect = timelineChart.canvas.getBoundingClientRect();
-          var x = e.clientX - canvasRect.left;
-          return Math.round(timelineChart.scales.x.getValueForPixel(x));
-        }
-
-        box.addEventListener('pointerdown', function (e) {
-          dragging = true;
-          box.setPointerCapture(e.pointerId);
-          setPointer(indexFromEvent(e));
+      var slider = document.getElementById('waveSlider2');
+      if (slider) {
+        slider.addEventListener('input', function () {
+          updatePanel(parseInt(this.value, 10));
         });
-        box.addEventListener('pointermove', function (e) {
-          if (dragging || e.buttons > 0) setPointer(indexFromEvent(e));
-        });
-        box.addEventListener('pointerup', function () { dragging = false; });
-        box.addEventListener('pointerleave', function () { dragging = false; });
-
-        window.addEventListener('resize', function () {
-          var active = document.querySelector('.tl-chip.active');
-          setPointer(active ? parseInt(active.getAttribute('data-day'), 10) : (cd.events[0] ? cd.events[0].day : 0));
-        });
-
-        renderChips();
-        setPointer(cd.events[0] ? cd.events[0].day : 0);
-      })();
+        updatePanel(parseInt(slider.value, 10));
+      }
     }
   }
 })();
@@ -525,7 +438,31 @@
   if (!bars) return;
   var fills = bars.querySelectorAll('.dc-bar-fill');
   if (!fills.length) return;
+  var values = bars.querySelectorAll('.dc-stat-value');
   var done = false;
+
+  function format(n) {
+    return n.toLocaleString('en-US');
+  }
+
+  function countUp(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    if (isNaN(target)) return;
+    var dur = 1400;
+    var t0 = null;
+    function tick(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      p = 1 - Math.pow(1 - p, 3);
+      el.textContent = format(Math.round(target * p));
+      if (p < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        el.textContent = format(target);
+      }
+    }
+    requestAnimationFrame(tick);
+  }
 
   function animate() {
     if (done) return;
@@ -534,6 +471,7 @@
       var w = parseFloat(fill.getAttribute('data-width'));
       if (!isNaN(w)) fill.style.width = w + '%';
     });
+    values.forEach(countUp);
   }
 
   if ('IntersectionObserver' in window) {
