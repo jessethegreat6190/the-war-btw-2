@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&family=Courier+Prime:wght@400;700&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260805a" />
+  <link rel="stylesheet" href="styles.css?v=20260805b" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
   <noscript>
     <style>.reveal, .reveal-top { opacity: 1; transform: none; }</style>
@@ -53,7 +53,7 @@
   <canvas id="clusterCanvas" style="position:absolute;inset:0;width:100%;height:100%;will-change:transform;" aria-hidden="true"></canvas>
   <div id="clusterCaption" style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);text-align:center;z-index:10;opacity:0;pointer-events:none;transition:opacity 0.8s ease;">
     <div style="font-family:'DM Sans',system-ui,sans-serif;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px;">Three campaigns · One target</div>
-    <div style="font-family:'DM Sans',system-ui,sans-serif;font-size:12px;letter-spacing:0.03em;color:rgba(255,255,255,0.55);max-width:380px;line-height:1.5;">The most significant campaign was aimed at the same small room, the information space monitored by @UN and @EUCouncil, and it ran at machine speed, timed to the moments those institutions were deciding.</div>
+    <div style="font-family:'DM Sans',system-ui,sans-serif;font-size:12px;letter-spacing:0.03em;color:rgba(255,255,255,0.55);max-width:380px;line-height:1.5;">The most significant campaign was aimed at the same small room - where the decisions were being made.</div>
   </div>
 </div>
 
@@ -85,35 +85,35 @@
     <div class="stats-track">
       <div class="stats-item">
         <div class="min-w-0">
-          <div class="stat-value">2,000+</div>
+          <div class="stat-value" data-count="2000" data-suffix="+">2,000+</div>
           <div class="stat-label">Posts analysed</div>
         </div>
         <span class="stat-sep" aria-hidden="true"></span>
       </div>
-      <div class="stats-item">
+      <div class="stats-item stats-hold">
         <div>
-          <div class="stat-value">12</div>
+          <div class="stat-value" data-count="12">12</div>
           <div class="stat-label">Hashtags tracked</div>
         </div>
         <span class="stat-sep" aria-hidden="true"></span>
       </div>
-      <div class="stats-item">
+      <div class="stats-item stats-hold">
         <div>
-          <div class="stat-value">3</div>
+          <div class="stat-value" data-count="3">3</div>
           <div class="stat-label">Distinct campaigns</div>
         </div>
         <span class="stat-sep" aria-hidden="true"></span>
       </div>
-      <div class="stats-item">
+      <div class="stats-item stats-hold">
         <div>
-          <div class="stat-value">90</div>
+          <div class="stat-value" data-count="90">90</div>
           <div class="stat-label">Days monitored</div>
         </div>
         <span class="stat-sep" aria-hidden="true"></span>
       </div>
-      <div class="stats-item">
+      <div class="stats-item stats-hold">
         <div>
-          <div class="stat-value accent">0</div>
+          <div class="stat-value accent" data-count="0">0</div>
           <div class="stat-label">Prosecutions</div>
         </div>
       </div>
@@ -427,22 +427,24 @@
           <div>
             <h4 class="ops-ev-heading">Feature: Engagement paradox</h4>
             <p class="ops-ev-text">@RwandaN41033494 achieved a median of 200 views per post across 152 posts. The entire 90-account covert network achieved a median of 14. A single committed individual, posting at human pace over 21 days, reached more people per post than a coordinated operation with machine-speed burst capability. The difference is asset quality: the flooder&rsquo;s content was findable and readable; the network&rsquo;s content was invisible to anyone not already searching its specific hashtags.</p>
-            <div class="ops-bars">
+            <div class="median-views">
               <div class="ops-bars-label">Median views per post</div>
-              <div class="ops-bar-row">
-                <span class="ops-bar-name">Flooder</span>
-                <div class="ops-bar-track"><div class="ops-bar-fill ops-bar-flooder" data-w="100%"></div></div>
-                <span class="ops-bar-meta"><strong>200</strong> views</span>
-              </div>
-              <div class="ops-bar-row">
-                <span class="ops-bar-name">State camp.</span>
-                <div class="ops-bar-track"><div class="ops-bar-fill ops-bar-state" data-w="76%"></div></div>
-                <span class="ops-bar-meta"><strong>153</strong> views</span>
-              </div>
-              <div class="ops-bar-row">
-                <span class="ops-bar-name">Covert net.</span>
-                <div class="ops-bar-track"><div class="ops-bar-fill" data-w="7%"></div></div>
-                <span class="ops-bar-meta"><strong>14</strong> views</span>
+              <div class="median-cells">
+                <div class="median-cell">
+                  <span class="median-num">200</span>
+                  <span class="median-note">Flooder &middot; views</span>
+                  <div class="median-track"><div class="median-fill" style="width:100%"></div></div>
+                </div>
+                <div class="median-cell">
+                  <span class="median-num">153</span>
+                  <span class="median-note">State camp. &middot; views</span>
+                  <div class="median-track"><div class="median-fill" style="width:76%"></div></div>
+                </div>
+                <div class="median-cell">
+                  <span class="median-num">14</span>
+                  <span class="median-note">Covert net. &middot; views</span>
+                  <div class="median-track"><div class="median-fill" style="width:7%"></div></div>
+                </div>
               </div>
             </div>
             <p class="ops-ev-text ops-ev-note">For scale: &ldquo;State camp.&rdquo;, a one-word observation in a single post, drew 153 views.</p>
@@ -700,17 +702,9 @@
 </section>
 
 <!-- Full report -->
-<section id="full-report" class="full-report" aria-labelledby="report-title">
+<section id="full-report" class="full-report">
   <div class="container-wide">
     <div class="report-inner">
-      <div class="report-head reveal">
-        <p class="report-kicker">The Full Report &middot; A Thraets Investigation</p>
-        <h2 id="report-title" class="report-title">Manufactured Reality</h2>
-        <p class="report-subtitle">How three actors in the Eastern DRC conflict weaponised information infrastructure to fight a war before and alongside the soldiers.</p>
-        <p class="report-meta">July 2026 &middot; Thraets Foundation</p>
-      </div>
-
-      <hr class="report-rule" />
 
       <div class="report-body">
 
@@ -1136,7 +1130,7 @@
   </div>
 </div>
 
-<script src="app.js" defer></script>
+<script src="app.js?v=20260805c" defer></script>
 
 <!-- Wave chart -->
 <script src="wave-chart.js?v=20260804b" defer></script>
