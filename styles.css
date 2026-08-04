@@ -807,53 +807,6 @@ figcaption {
   .mh-left { gap: 16px; }
 }
 
-/* Topic tag marquee */
-.topic-marquee {
-  overflow: hidden;
-  background: var(--paper-2);
-  border-bottom: 1px solid var(--rule-lt);
-  padding: 13px 0;
-  white-space: nowrap;
-}
-
-.topic-marquee-track {
-  display: flex;
-  width: max-content;
-  animation: topic-scroll 42s linear infinite;
-}
-
-.topic-marquee:hover .topic-marquee-track,
-.topic-marquee:focus-within .topic-marquee-track {
-  animation-play-state: paused;
-}
-
-.topic-marquee-list {
-  display: flex;
-  align-items: center;
-  gap: 34px;
-  padding-right: 34px;
-  margin: 0;
-  list-style: none;
-}
-
-.topic-marquee-list li {
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: var(--ink-4);
-}
-
-@keyframes topic-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .topic-marquee-track { animation: none; }
-  .topic-marquee-track { flex-wrap: wrap; }
-}
-
 /* Pill button */
 .pill-btn {
   display: inline-flex;
@@ -888,44 +841,28 @@ figcaption {
 /* Hero */
 .hero {
   position: relative;
-  padding: 0 0 88px;
+  padding: 8px 0 40px;
   color: var(--ink);
 }
 
 @media (min-width: 768px) {
-  .hero { padding: 0 0 128px; }
-}
-
-.hero-photo {
-  display: block;
-  margin: 0 0 64px;
-}
-
-.hero-photo img {
-  display: block;
-  width: 100%;
-  height: auto;
+  .hero { padding: 16px 0 56px; }
 }
 
 .hero-inner {
   position: relative;
 }
 
-.hero-text { max-width: 640px; margin: 0 auto; text-align: center; }
-
-.hero-kicker {
-  color: var(--ink-3);
-  margin: 0 0 16px;
-}
+.hero-text { max-width: 720px; }
 
 .hero-title {
   font-family: var(--display);
-  font-size: clamp(1.75rem, 4.4vw, 2.75rem);
+  font-size: clamp(1.5rem, 3.6vw, 2.25rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.12;
   letter-spacing: -0.02em;
   color: var(--ink);
-  margin-bottom: 12px;
+  margin: 0 0 10px;
 }
 
 .hero-em {
@@ -937,72 +874,42 @@ figcaption {
 
 .hero-subtitle {
   font-family: var(--deck);
-  font-size: clamp(1rem, 1.6vw, 1.125rem);
-  line-height: 1.65;
-  color: var(--ink-3);
-  margin: 0 auto 12px;
-  max-width: 560px;
-}
-
-.hero-byline {
-  border-top: 1px solid var(--rule-lt);
-  padding: 16px 0 0;
-  margin: 0 auto 8px;
-  max-width: 560px;
-}
-
-.hero-byline-label {
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-4);
-}
-
-.hero-byline-support {
-  font-family: var(--sans);
-  font-size: 12px;
-  font-style: italic;
-  color: var(--ink-4);
-  margin: 0 auto 12px;
-}
-
-.report-callout {
-  display: flex;
-  align-items: center;
-  max-width: 560px;
-  margin: 40px auto 0;
-  padding: 28px 32px;
-  border: 1px solid rgb(46, 46, 46);
-  background: #fff;
-  text-align: left;
-}
-
-.report-callout-label {
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin-bottom: 8px;
-}
-
-.report-callout-copy {
-  font-family: var(--deck);
-  font-size: 1.05rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
   line-height: 1.6;
-  color: var(--ink-2);
+  color: var(--ink-3);
+  margin: 0 0 18px;
+  max-width: 640px;
 }
 
-.report-callout-here {
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule-lt);
+  font-family: var(--sans);
+  font-size: 12px;
+}
+
+.hero-meta-author {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.hero-report-link {
+  margin-left: auto;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: #c0392b;
-  text-decoration: underline;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-.report-callout-here:hover {
-  color: #a32c1f;
+.hero-report-link:hover {
   text-decoration: underline;
 }
 
@@ -1162,7 +1069,7 @@ figcaption {
   #data-center { padding: 40px 0; }
   #conclusion { padding: 40px 0; }
   .site-footer { padding: 40px 0; }
-  .hero { padding: 48px 0 64px; }
+  .hero { padding: 16px 0 40px; }
 }
 
 .history-block {
