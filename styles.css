@@ -2084,15 +2084,16 @@ a:focus-visible {
 .bar-row strong {
   display: inline-block;
   width: var(--value);
-  min-width: 42px;
+  min-width: 60px;
   max-width: 100%;
   background: linear-gradient(90deg, var(--color-ink), #4c4b49);
   color: #fff;
   border-radius: 999px;
   text-align: center;
-  padding: 0.42rem 0.5rem;
-  font-size: 0.7rem;
+  padding: 0.65rem 0.7rem;
+  font-size: 0.82rem;
   font-family: var(--font-mono);
+  line-height: 1.4;
 }
 
 /* Wave chart embed */
