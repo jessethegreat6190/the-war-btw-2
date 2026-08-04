@@ -487,16 +487,21 @@
   var total = slides.length;
   if (total < 2) return;
   var dots = Array.prototype.slice.call(document.querySelectorAll('.search-car-dot'));
-  var counter = document.getElementById('srCounter');
+  var glide = document.getElementById('srGlide');
   var prev = document.getElementById('srPrev');
   var next = document.getElementById('srNext');
   var cur = 0;
+
+  function step() {
+    if (!dots.length) return 0;
+    return dots[0].offsetWidth + 8;
+  }
 
   function go(n) {
     cur = Math.max(0, Math.min(total - 1, n));
     track.style.transform = 'translateX(-' + (cur * 100) + '%)';
     dots.forEach(function (d, i) { d.classList.toggle('active', i === cur); });
-    if (counter) counter.textContent = (cur + 1) + ' / ' + total;
+    if (glide) glide.style.transform = 'translateX(' + (cur * step()) + 'px)';
     if (prev) prev.disabled = cur === 0;
     if (next) next.disabled = cur === total - 1;
   }
@@ -507,7 +512,11 @@
   if (prev) prev.addEventListener('click', function () { go(cur - 1); });
   if (next) next.addEventListener('click', function () { go(cur + 1); });
 
-  window.addEventListener('resize', function () { track.style.transform = 'translateX(-' + (cur * 100) + '%)'; });
+  window.addEventListener('resize', function () {
+    track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+    if (glide) glide.style.transform = 'translateX(' + (cur * step()) + 'px)';
+  });
+  go(0);
 })();
 
 /* ---- Data center bar animation ---- */
