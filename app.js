@@ -213,4 +213,26 @@
       if (e.key === 'Escape') close();
     });
   })();
+
+  /* ---- Ops bars animation ---- */
+  (function () {
+    var bars = document.querySelectorAll('.ops-bar-fill[data-w]');
+    if (!bars.length) return;
+    var done = false;
+    function run() {
+      if (done) return;
+      done = true;
+      Array.prototype.forEach.call(bars, function (f) {
+        f.style.width = f.getAttribute('data-w') || '0%';
+      });
+    }
+    if (!('IntersectionObserver' in window)) { run(); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { run(); io.disconnect(); }
+      });
+    }, { threshold: 0.3 });
+    io.observe(bars[0].closest('.ops-bars') || bars[0].closest('.ops-script') || bars[0].closest('.ops-verbatim') || bars[0].closest('.ops-hashtags') || bars[0].closest('.ops-timeline') || document.body);
+  })();
+
 })();
