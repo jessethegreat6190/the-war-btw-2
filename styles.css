@@ -354,16 +354,30 @@ a:focus-visible {
   margin-bottom: 8px;
 }
 
-.report-callout-copy {
-  font-family: var(--font-deck);
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: var(--color-body);
+.report-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  background: var(--color-ink);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: transform 180ms ease, background-color 180ms ease;
 }
 
-.report-callout-copy a {
-  color: var(--color-primary);
-  text-decoration: underline;
+.report-btn:hover {
+  transform: translateY(-1px);
+  background: var(--color-primary);
+}
+
+.report-btn .pill-arrow {
+  font-family: var(--font-ui);
 }
 
 @media (min-width: 768px) {

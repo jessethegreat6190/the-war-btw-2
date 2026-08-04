@@ -1,4 +1,4 @@
-/* cluster.js — lightweight cluster-intro canvas animation
+/* cluster.js, lightweight cluster-intro canvas animation
    Optimisations over the original:
    - IntersectionObserver: only runs when visible
    - Capped DPR at 1.5 (not devicePixelRatio)
@@ -93,7 +93,7 @@
     frame++;
     phaseTimer++;
 
-    /* phase sequencing — same as original but lighter */
+    /* phase sequencing, same as original but lighter */
     if (animPhase === 0 && phaseTimer > 40) {
       animPhase = 1; phaseTimer = 0;
     } else if (animPhase === 1) {
@@ -120,7 +120,7 @@
     });
     ctx.restore();
 
-    /* cluster glows — simple circles, no radialGradient */
+    /* cluster glows, simple circles, no radialGradient */
     var glowR = nr * 1.3;
     [[c.drc, C.drc.glow], [c.rwanda, C.rwanda.glow], [c.intl, C.intl.glow]].forEach(function (g) {
       ctx.save();
@@ -201,7 +201,7 @@
     if (raf) { cancelAnimationFrame(raf); raf = null; }
   }
 
-  /* IntersectionObserver — start/stop based on viewport */
+  /* IntersectionObserver, start/stop based on viewport */
   var observer;
   if ('IntersectionObserver' in window) {
     observer = new IntersectionObserver(function (entries) {
