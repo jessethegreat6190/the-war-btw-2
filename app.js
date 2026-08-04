@@ -247,13 +247,9 @@
 
     var ctx = document.getElementById('chartTimeline');
     if (ctx) {
-      var KEY_EVENTS = [
-        { day: 25, label: 'Goma falls' },
-        { day: 46, label: 'Bukavu falls' },
-        { day: 54, label: 'EU vote postponed' },
-        { day: 68, label: 'Minembwe strike' },
-        { day: 75, label: 'EU sanctions' },
-      ];
+      var KEY_EVENTS = cd.events.map(function (ev) {
+        return { day: ev.day, label: ev.label, badge: ev.badge, title: ev.title };
+      });
       var eventMarkers = {
         id: 'eventMarkers',
         afterDraw: function (chart) {
@@ -264,7 +260,7 @@
           c.save();
           c.font = "600 9px 'Libre Franklin', system-ui, sans-serif";
           KEY_EVENTS.forEach(function (ev) {
-            var px = xs.getPixelForValue(ev.day - 2);
+            var px = xs.getPixelForValue(ev.day);
             c.strokeStyle = 'rgba(245,242,234,0.22)';
             c.setLineDash([3, 3]);
             c.beginPath();
@@ -280,7 +276,7 @@
         },
       };
 
-      new Chart(ctx, {
+      var timelineChart = new Chart(ctx, {
         type: 'line',
         data: {
           labels: cd.dates,
@@ -365,6 +361,120 @@
           },
         },
       });
+
+      /* ---- Timeline pointer + readout ---- */
+      (function () {
+        var box = document.getElementById('timelineBox');
+        var pointer = document.getElementById('tlPointer');
+        var readout = document.getElementById('tlReadout');
+        var eventsWrap = document.getElementById('tlEvents');
+        if (!box || !pointer || !readout || !timelineChart) return;
+
+        var pointerDate = pointer.querySelector('.tl-pointer-date');
+        var dragging = false;
+
+        function nearestEvent(index) {
+          var best = null;
+          var bestDist = 1e9;
+          cd.events.forEach(function (ev) {
+            var d = Math.abs(ev.day - index);
+            if (d < bestDist) { bestDist = d; best = ev; }
+          });
+          return { event: best, dist: bestDist };
+        }
+
+        function dailyStats(index) {
+          return [
+            { label: 'Covert', v: cd.covert[index] || 0, c: RED },
+            { label: 'Flooder', v: cd.flooder[index] || 0, c: AMBER },
+            { label: 'State', v: cd.state[index] || 0, c: BLUE },
+            { label: 'Organic', v: cd.organic[index] || 0, c: GREY },
+          ];
+        }
+
+        function renderReadout(index) {
+          var near = nearestEvent(index);
+          var stats = dailyStats(index).map(function (s) {
+            return '<span class="ro-stat"><b style="color:' + s.c + '">' + s.v + '</b> ' + s.label + '</span>';
+          }).join('');
+          if (near.event && near.dist <= 2) {
+            var ev = near.event;
+            readout.innerHTML =
+              '<div class="ro-kicker">' + (ev.badge ? ev.badge + ' &middot; Key event' : 'Key event') + '</div>' +
+              '<div class="ro-date">' + ev.label + '</div>' +
+              '<div class="ro-title">' + ev.title + '</div>' +
+              '<div class="ro-body">' + ev.body + '</div>' +
+              '<div class="ro-stats">' + stats + '</div>';
+          } else {
+            readout.innerHTML =
+              '<div class="ro-kicker">Timeline &middot; ' + (cd.dates[index] || '') + '</div>' +
+              '<div class="ro-title">Daily stream activity</div>' +
+              '<div class="ro-body">Move the pointer across the graph to inspect posts per day, or select a key event below.</div>' +
+              '<div class="ro-stats">' + stats + '</div>';
+          }
+        }
+
+        function renderChips() {
+          if (!eventsWrap) return;
+          eventsWrap.innerHTML = '';
+          cd.events.forEach(function (ev) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'tl-chip';
+            b.setAttribute('data-day', ev.day);
+            b.innerHTML = (ev.badge ? '<span class="tl-chip-badge">' + ev.badge + '</span>' : '') + ev.label + ' &middot; ' + ev.title;
+            eventsWrap.appendChild(b);
+          });
+          eventsWrap.addEventListener('click', function (e) {
+            var chip = e.target.closest('.tl-chip');
+            if (chip) setPointer(parseInt(chip.getAttribute('data-day'), 10));
+          });
+        }
+
+        function setPointer(index) {
+          index = Math.max(0, Math.min(cd.dates.length - 1, index));
+          var area = timelineChart.chartArea;
+          if (!area) return;
+          var canvasRect = timelineChart.canvas.getBoundingClientRect();
+          var boxRect = box.getBoundingClientRect();
+          var px = timelineChart.scales.x.getPixelForValue(index);
+          pointer.style.left = (canvasRect.left - boxRect.left + px) + 'px';
+          pointer.style.top = (canvasRect.top - boxRect.top + area.top) + 'px';
+          pointer.style.height = (area.bottom - area.top) + 'px';
+          if (pointerDate) pointerDate.textContent = cd.dates[index] || '';
+          renderReadout(index);
+          if (eventsWrap) {
+            Array.prototype.forEach.call(eventsWrap.children, function (chip) {
+              chip.classList.toggle('active', parseInt(chip.getAttribute('data-day'), 10) === index);
+            });
+          }
+        }
+
+        function indexFromEvent(e) {
+          var canvasRect = timelineChart.canvas.getBoundingClientRect();
+          var x = e.clientX - canvasRect.left;
+          return Math.round(timelineChart.scales.x.getValueForPixel(x));
+        }
+
+        box.addEventListener('pointerdown', function (e) {
+          dragging = true;
+          box.setPointerCapture(e.pointerId);
+          setPointer(indexFromEvent(e));
+        });
+        box.addEventListener('pointermove', function (e) {
+          if (dragging || e.buttons > 0) setPointer(indexFromEvent(e));
+        });
+        box.addEventListener('pointerup', function () { dragging = false; });
+        box.addEventListener('pointerleave', function () { dragging = false; });
+
+        window.addEventListener('resize', function () {
+          var active = document.querySelector('.tl-chip.active');
+          setPointer(active ? parseInt(active.getAttribute('data-day'), 10) : (cd.events[0] ? cd.events[0].day : 0));
+        });
+
+        renderChips();
+        setPointer(cd.events[0] ? cd.events[0].day : 0);
+      })();
     }
   }
 })();

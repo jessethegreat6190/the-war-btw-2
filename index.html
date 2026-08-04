@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Franklin:wght@400;600;700&family=Archivo+Black&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260804" />
+  <link rel="stylesheet" href="styles.css?v=20260804b" />
 </head>
 <body>
 
@@ -32,6 +32,48 @@
     </div>
   </div>
 </header>
+
+<!-- Topic tag marquee -->
+<div class="topic-marquee" aria-hidden="true">
+  <div class="topic-marquee-track">
+    <ul class="topic-marquee-list">
+      <li>#TshisekediIsKilling</li>
+      <li>#FDLR</li>
+      <li>#M23</li>
+      <li>#Goma</li>
+      <li>#Bukavu</li>
+      <li>#Banyamulenge</li>
+      <li>#Rwanda</li>
+      <li>#DRC</li>
+      <li>#Minembwe</li>
+      <li>#EUSanctions</li>
+      <li>#UnitedNations</li>
+      <li>#Kagame</li>
+      <li>#Tshisekedi</li>
+      <li>#Kinshasa</li>
+      <li>#InfluenceOps</li>
+      <li>#FIMI</li>
+    </ul>
+    <ul class="topic-marquee-list" aria-hidden="true">
+      <li>#TshisekediIsKilling</li>
+      <li>#FDLR</li>
+      <li>#M23</li>
+      <li>#Goma</li>
+      <li>#Bukavu</li>
+      <li>#Banyamulenge</li>
+      <li>#Rwanda</li>
+      <li>#DRC</li>
+      <li>#Minembwe</li>
+      <li>#EUSanctions</li>
+      <li>#UnitedNations</li>
+      <li>#Kagame</li>
+      <li>#Tshisekedi</li>
+      <li>#Kinshasa</li>
+      <li>#InfluenceOps</li>
+      <li>#FIMI</li>
+    </ul>
+  </div>
+</div>
 
 <main>
 
@@ -516,10 +558,17 @@
     <hr class="section-rule" />
     <div class="reveal chart-container">
       <div class="chart-title">Posts per day, January&ndash;March 2025</div>
-      <div class="chart-desc">Four streams of activity across three months: the covert network (red), a single anti-Kagame flooder (amber), the CongolaisTelema state campaign (blue), and organic discussion (grey). Key decision windows are marked.</div>
-      <div class="chart-box chart-box-dark">
+      <div class="chart-desc">Four streams of activity across three months: the covert network (red), a single anti-Kagame flooder (amber), the CongolaisTelema state campaign (blue), and organic discussion (grey). Key decision windows are marked. Drag the pointer across the graph or tap a key event below to inspect it.</div>
+      <div class="chart-box chart-box-dark" id="timelineBox">
         <canvas id="chartTimeline"></canvas>
+        <div class="tl-pointer" id="tlPointer" aria-hidden="true">
+          <span class="tl-pointer-line"></span>
+          <span class="tl-pointer-dot"></span>
+          <span class="tl-pointer-date" id="tlPointerDate"></span>
+        </div>
       </div>
+      <div class="chart-readout" id="tlReadout" aria-live="polite"></div>
+      <div class="tl-events" id="tlEvents" role="list" aria-label="Key events"></div>
       <div class="chart-source">Source: Thraets investigation dataset &middot; 2,000+ posts analysed</div>
     </div>
 
@@ -1043,6 +1092,52 @@
   update();
 })();
 
+// Dynamic navigation: scrollspy + masthead hide/show
+(function() {
+  var masthead = document.getElementById('masthead');
+  if (!masthead) return;
+  var links = Array.prototype.slice.call(document.querySelectorAll('.mh-link'));
+  var sections = links.map(function(l) {
+    var t = document.querySelector(l.getAttribute('href'));
+    return t || null;
+  });
+  var lastY = window.scrollY;
+  var ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      var y = window.scrollY;
+      var h = window.innerHeight;
+
+      if (y > 160 && y > lastY) {
+        masthead.classList.add('mh-hidden');
+      } else {
+        masthead.classList.remove('mh-hidden');
+      }
+      masthead.classList.toggle('mh-scrolled', y > 8);
+      lastY = y;
+
+      var current = null;
+      sections.forEach(function(sec) {
+        if (!sec) return;
+        var rect = sec.getBoundingClientRect();
+        if (rect.top <= 96) current = sec;
+      });
+      links.forEach(function(l, i) {
+        l.classList.toggle('active', sections[i] && sections[i] === current);
+      });
+
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+})();
+
 // Evidence carousel navigation
 (function() {
   var track = document.getElementById('evTrack');
@@ -1062,7 +1157,9 @@
     if (index < 0) index = cards.length - 1;
     if (index >= cards.length) index = 0;
     current = index;
-    cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    var card = cards[index];
+    var targetLeft = card.offsetLeft - (wrap.clientWidth - card.offsetWidth) / 2;
+    wrap.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
     cards.forEach(function(c, i) {
       c.classList.toggle('ev-card-active', i === index);
     });
