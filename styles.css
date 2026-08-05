@@ -2347,6 +2347,28 @@ a:focus-visible {
 
 .ft-copy { color: var(--color-muted); }
 
+.ft-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ft-links a {
+  color: var(--color-muted);
+  text-decoration: none;
+  transition: color 150ms;
+}
+
+.ft-links a:hover { color: var(--color-ink); }
+
+.ft-link-sep {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--color-muted);
+  flex: none;
+}
+
 .ft-legal {
   display: flex;
   gap: 20px;
