@@ -58,19 +58,6 @@
     Array.prototype.forEach.call(items, function (el) { io.observe(el); });
   })();
 
-  /* ---- Lottie document icon ---- */
-  (function () {
-    var el = document.getElementById('docIcon');
-    if (!el || typeof window.lottie === 'undefined') return;
-    window.lottie.loadAnimation({
-      container: el,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: 'assets/document-icon.json'
-    });
-  })();
-
   /* ---- Evidence rail auto-advance ---- */
   (function () {
     var track = document.getElementById('evTrack');
@@ -164,37 +151,68 @@
     io.observe(wrap);
   })();
 
-  /* ---- Search simulation carousel ---- */
+  /* ---- Search simulation carousel (auto-advance) ---- */
   (function () {
     var track = document.getElementById('simTrack');
     if (!track) return;
     var slides = track.children;
     if (!slides.length) return;
     var dots = Array.prototype.slice.call(document.querySelectorAll('#simDots .sim-dot'));
-    var prev = document.getElementById('simPrev');
-    var next = document.getElementById('simNext');
-    var counter = document.getElementById('simCounter');
+    var frame = track.closest('.sim-frame') || track;
     var total = slides.length;
     var i = 0;
+    var timer = null;
+    var PAUSE = 4200;
 
     function render() {
       track.style.transform = 'translateX(-' + (i * 100) + '%)';
       dots.forEach(function (d, k) { d.classList.toggle('active', k === i); });
-      if (counter) counter.textContent = (i + 1) + ' / ' + total;
-      if (prev) prev.disabled = i === 0;
-      if (next) next.disabled = i === total - 1;
     }
 
     function go(n) {
-      i = Math.max(0, Math.min(total - 1, n));
+      i = (n + total) % total;
       render();
     }
 
+    function start() {
+      if (timer || total < 2) return;
+      timer = window.setInterval(function () { go(i + 1); }, PAUSE);
+    }
+
+    function stop() {
+      if (timer) { window.clearInterval(timer); timer = null; }
+    }
+
     dots.forEach(function (d) {
-      d.addEventListener('click', function () { go(parseInt(d.getAttribute('data-go'), 10)); });
+      d.addEventListener('click', function () {
+        go(parseInt(d.getAttribute('data-go'), 10));
+        stop();
+        start();
+      });
     });
-    if (prev) prev.addEventListener('click', function () { go(i - 1); });
-    if (next) next.addEventListener('click', function () { go(i + 1); });
+
+    frame.addEventListener('mouseenter', stop);
+    frame.addEventListener('mouseleave', start);
+    frame.addEventListener('touchstart', stop, { passive: true });
+    frame.addEventListener('touchend', start, { passive: true });
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) start();
+          else stop();
+        });
+      }, { threshold: 0.25 });
+      io.observe(frame);
+    } else {
+      start();
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop();
+      else start();
+    });
+
     render();
   })();
 
@@ -238,25 +256,43 @@
     });
   })();
 
-  /* ---- Ops bars animation ---- */
+  /* ---- Posts inside #CongolaisTelema donut ---- */
   (function () {
-    var bars = document.querySelectorAll('.ops-bar-fill[data-w]');
-    if (!bars.length) return;
+    var donut = document.querySelector('.ops-donut');
+    if (!donut) return;
+    var nums = Array.prototype.slice.call(donut.querySelectorAll('[data-count]'));
+    if (!nums.length) return;
     var done = false;
+
+    function countUp(el, target, dur, delay) {
+      var start = null;
+      function tick(now) {
+        if (start === null) start = now;
+        var p = Math.min(1, (now - start) / dur);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased).toLocaleString('en-US');
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      setTimeout(function () { requestAnimationFrame(tick); }, delay || 0);
+    }
+
     function run() {
       if (done) return;
       done = true;
-      Array.prototype.forEach.call(bars, function (f) {
-        f.style.width = f.getAttribute('data-w') || '0%';
+      donut.classList.add('in-view');
+      nums.forEach(function (n) {
+        var delay = n.getAttribute('data-delay') ? parseInt(n.getAttribute('data-delay'), 10) : 0;
+        countUp(n, parseInt(n.getAttribute('data-count'), 10) || 0, 1500, delay);
       });
     }
+
     if (!('IntersectionObserver' in window)) { run(); return; }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { run(); io.disconnect(); }
       });
     }, { threshold: 0.3 });
-    io.observe(bars[0].closest('.ops-bars') || bars[0].closest('.ops-script') || bars[0].closest('.ops-verbatim') || bars[0].closest('.ops-hashtags') || bars[0].closest('.ops-timeline') || document.body);
+    io.observe(donut);
   })();
 
   /* ---- Stats count-up ---- */
@@ -351,6 +387,61 @@
       });
     }, { threshold: 0.05, rootMargin: '0px 0px 80px 0px' });
     frames.forEach(function (f) { io.observe(f); });
+  })();
+
+  /* ---- Section scrollspy ---- */
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.spy-link'));
+    if (!links.length) return;
+    var ids = [];
+    var sections = [];
+    links.forEach(function (a) {
+      var id = (a.getAttribute('href') || '').replace(/^#/, '');
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (!el) return;
+      ids.push(id);
+      sections.push(el);
+    });
+    if (!sections.length) return;
+
+    function setActive(id) {
+      links.forEach(function (a) {
+        a.classList.toggle('active', (a.getAttribute('href') || '') === '#' + id);
+      });
+    }
+
+    function onScroll() {
+      var pos = window.scrollY + window.innerHeight * 0.35;
+      var current = null;
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i].offsetTop <= pos) current = ids[i];
+      }
+      if (current) setActive(current);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  })();
+
+  /* ---- Deconstructed words in the concluding quote ---- */
+  (function () {
+    var quotes = Array.prototype.slice.call(document.querySelectorAll('.con-quote'));
+    if (!quotes.length) return;
+    if (!('IntersectionObserver' in window)) {
+      quotes.forEach(function (q) { q.classList.add('deconstructed'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('deconstructed');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    quotes.forEach(function (q) { io.observe(q); });
   })();
 
 })();

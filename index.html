@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&family=Courier+Prime:wght@400;700&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260805h" />
+  <link rel="stylesheet" href="styles.css?v=20260805i" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
   <noscript>
     <style>.reveal, .reveal-top { opacity: 1; transform: none; }</style>
@@ -48,6 +48,14 @@
 
 <main>
 
+<!-- Section scrollspy -->
+<nav class="spy-nav" id="spyNav" aria-label="Section navigation">
+  <a class="spy-link" href="#opening">Introduction</a>
+  <a class="spy-link" href="#history">History</a>
+  <a class="spy-link" href="#operations">Operations</a>
+  <a class="spy-link" href="#engagement">Analysis</a>
+</nav>
+
 <!-- Cluster intro (lightweight canvas) -->
 <div id="cluster-intro" style="position:relative;width:100%;height:100vh;min-height:560px;background:#0a0a0a;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;">
   <canvas id="clusterCanvas" style="position:absolute;inset:0;width:100%;height:100%;will-change:transform;" aria-hidden="true"></canvas>
@@ -71,7 +79,6 @@
       </div>
       <div class="report-callout">
         <div class="report-callout-row">
-          <div id="docIcon" class="rp-icon" aria-hidden="true"></div>
           <a href="assets/Manufactured_Reality_from_ThraetSpace.pdf" target="_blank" rel="noreferrer" class="report-btn">Read the full report <span class="pill-arrow">&rarr;</span></a>
         </div>
       </div>
@@ -124,7 +131,10 @@
 <!-- Opening -->
 <section id="opening" class="opening" aria-labelledby="opening-title">
   <header class="opening-header">
-    <div class="section-eyebrow">01 The Opening</div>
+    <div class="sec-head">
+      <div class="sec-ring" aria-hidden="true"><span class="sec-num">01</span></div>
+      <p class="sec-kicker">The Opening</p>
+    </div>
     <h2 id="opening-title" class="opening-heading">A visit, a denial, and the<br />information battle that followed</h2>
   </header>
 
@@ -175,8 +185,8 @@
         <h3 class="section-eyebrow">Three actors, three positions</h3>
         <div>
           <div class="actor-item reveal" style="transition-delay:0ms"><div class="actor-name">DRC</div><p class="actor-desc">Foreign aggression by Rwanda. Sovereign state entitled to international protection.</p></div>
-          <div class="actor-item reveal" style="transition-delay:90ms"><div class="actor-name">Rwanda</div><p class="actor-desc">Defensive action. The international community failed to neutralise the FDLR for 30 years.</p></div>
-          <div class="actor-item reveal" style="transition-delay:180ms"><div class="actor-name">M23/AFC</div><p class="actor-desc">Indigenous Congolese movement with legitimate grievances, not a Rwandan proxy.</p></div>
+          <div class="actor-item reveal" style="transition-delay:160ms"><div class="actor-name">Rwanda</div><p class="actor-desc">Defensive action. The international community failed to neutralise the FDLR for 30 years.</p></div>
+          <div class="actor-item reveal" style="transition-delay:320ms"><div class="actor-name">M23/AFC</div><p class="actor-desc">Indigenous Congolese movement with legitimate grievances, not a Rwandan proxy.</p></div>
         </div>
       </div>
     </aside>
@@ -186,7 +196,10 @@
 <!-- History -->
 <section id="history" class="history" aria-labelledby="history-title">
   <div class="history-inner">
-    <div class="section-eyebrow">The Longest Shadow</div>
+    <div class="sec-head">
+      <div class="sec-ring" aria-hidden="true"><span class="sec-num">02</span></div>
+      <p class="sec-kicker">The Longest Shadow</p>
+    </div>
     <h2 id="history-title" class="hist-heading">Setting the <em>stage</em></h2>
     <div class="hist-prose">
       <p>In 1994, an estimated 800,000 people, the majority of them Tutsi, were killed in Rwanda in one of the fastest acts of mass murder in recorded history. When the genocide ended, it displaced. The Hutu militias responsible fled across the border into what was then Zaire, settling in the east, in the forests of the Kivus, keeping their weapons. Among the groups that emerged from those camps was the FDLR: an armed movement rooted in the same ideology that drove the genocide, operating on Congolese soil, thirty kilometres from the Rwandan border.</p>
@@ -208,7 +221,10 @@
 <section id="evidence" class="evidence" aria-labelledby="evidence-title">
   <div class="container-wide">
     <div class="ev-header">
-      <div class="section-eyebrow">03 Evidence</div>
+      <div class="sec-head">
+        <div class="sec-ring" aria-hidden="true"><span class="sec-num">03</span></div>
+        <p class="sec-kicker">Evidence</p>
+      </div>
       <h2 id="evidence-title" class="ev-heading">Posts from the dataset</h2>
     </div>
 
@@ -295,7 +311,10 @@
 <section id="operations" class="operations" aria-labelledby="operations-title">
   <div class="container-wide">
     <div class="reveal ops-head">
-      <div class="section-eyebrow">04 Three Operations</div>
+      <div class="sec-head">
+        <div class="sec-ring" aria-hidden="true"><span class="sec-num">04</span></div>
+        <p class="sec-kicker">Three Operations</p>
+      </div>
       <h2 id="operations-title" class="ops-heading">Three operations. One information space.</h2>
       <p class="ops-lede">To understand how that battle was being waged, the Thraets Investigations Team analysed over 2,000 posts across twelve hashtags on X between January and March 2025, covering the fall of Goma, the fall of Bukavu, and the diplomatic scramble that followed. What we found were three distinct campaigns operating in the same information space simultaneously.</p>
     </div>
@@ -501,18 +520,33 @@
             <h4 class="ops-ev-heading">Feature 02 — Hashtag infiltration</h4>
             <p class="ops-ev-tag">Reach made the campaign worth hijacking.</p>
             <p class="ops-ev-text">The covert network placed 190 posts carrying #CongolaisTelema alongside #TshisekediIsKilling, inserting genocide accusations into the search results of the DRC government&rsquo;s own hashtag. The campaign&rsquo;s 1.5 million views in its peak week was precisely what made it a target: a hashtag nobody searches is not worth hijacking. Struggles_23, the covert network&rsquo;s most persistent account, continued this until March 30, the final day of the dataset.</p>
-            <div class="ops-bars">
+            <div class="ops-donut">
               <div class="ops-bars-label">Posts inside #CongolaisTelema</div>
-              <div class="ops-bar-row">
-                <span class="ops-bar-name">State posts</span>
-                <div class="ops-bar-track"><div class="ops-bar-fill ops-bar-state" data-w="100%"></div></div>
-                <span class="ops-bar-meta"><strong>336</strong> posts</span>
+              <div class="donut-chart">
+                <svg viewBox="0 0 120 120" class="donut-svg" aria-hidden="true">
+                  <circle class="donut-ring" cx="60" cy="60" r="50" pathLength="100"></circle>
+                  <circle class="donut-seg donut-state" cx="60" cy="60" r="50" pathLength="100"></circle>
+                  <circle class="donut-seg donut-injected" cx="60" cy="60" r="50" pathLength="100"></circle>
+                </svg>
+                <div class="donut-center">
+                  <span class="donut-total" data-count="526">0</span>
+                  <span class="donut-total-lbl">posts total</span>
+                </div>
               </div>
-              <div class="ops-bar-row">
-                <span class="ops-bar-name">Injected</span>
-                <div class="ops-bar-track"><div class="ops-bar-fill" data-w="57%"></div></div>
-                <span class="ops-bar-meta"><strong>190</strong> posts</span>
-              </div>
+              <ul class="donut-legend">
+                <li class="donut-li">
+                  <span class="donut-dot donut-dot-state" aria-hidden="true"></span>
+                  <span class="donut-name">State posts</span>
+                  <strong class="donut-num" data-count="336" data-delay="150">0</strong>
+                  <em class="donut-pct">64%</em>
+                </li>
+                <li class="donut-li">
+                  <span class="donut-dot donut-dot-injected" aria-hidden="true"></span>
+                  <span class="donut-name">Injected</span>
+                  <strong class="donut-num" data-count="190" data-delay="1700">0</strong>
+                  <em class="donut-pct">36%</em>
+                </li>
+              </ul>
             </div>
             <p class="ops-ev-text ops-ev-note">For scale: state posts inside #CongolaisTelema reached 1.5M views in their peak week; the infiltrating network posts peaked near zero. Struggles_23 posted inside #CongolaisTelema until March 30, two weeks after the EU&rsquo;s March 17 designations.</p>
           </div>
@@ -590,11 +624,6 @@
         <button type="button" class="sim-dot" data-go="1" aria-label="Slide 2"></button>
         <button type="button" class="sim-dot" data-go="2" aria-label="Slide 3"></button>
       </div>
-      <span class="sim-counter" id="simCounter" aria-live="polite">1 / 3</span>
-      <div class="sim-nav">
-        <button type="button" class="sim-btn" id="simPrev">&#8592; Prev</button>
-        <button type="button" class="sim-btn" id="simNext">Next &#8594;</button>
-      </div>
     </div>
   </div>
 </section>
@@ -646,14 +675,17 @@
 <section id="conclusion" class="conclusion" aria-labelledby="conclusion-title">
   <div class="container-wide">
     <div class="reveal con-head">
-      <div class="section-eyebrow">05 What It Means</div>
+      <div class="sec-head">
+        <div class="sec-ring" aria-hidden="true"><span class="sec-num">05</span></div>
+        <p class="sec-kicker">What It Means</p>
+      </div>
       <h2 id="conclusion-title" class="con-title">The target was never the crowd</h2>
     </div>
     <div class="reveal con-body">
       <p>Propaganda, in its classical form, is a mass exercise. Saturate enough minds, shift the mood of a population, and you shift what governments feel they can do. The megaphone is its instrument. The crowd was its target.</p>
 
       <blockquote class="con-quote reveal-top">
-        <p>&ldquo;The prevailing instinct, when confronted with influence operations, is to reach for the label of misinformation: to find the lie and correct it. That instinct fails here, because there is no clean lie to correct.&rdquo;</p>
+        <p>&ldquo;The prevailing instinct, when confronted with influence operations, is to reach for the label of <span class="dec" data-word="misinformation">misinformation</span>: to find the <span class="dec" data-word="lie">lie</span> and correct it. That instinct fails here, because there is no clean <span class="dec" data-word="lie">lie</span> to correct.&rdquo;</p>
       </blockquote>
 
       <p>What this investigation documents is not simply a disinformation campaign. It is a campaign that understood, with some precision, that the battlefield for this conflict had shifted. Not to African television networks or newspaper front pages, but to a digital space with almost no equivalent rules, gatekeepers, or friction, one where a numbered list, a few dozen disposable accounts, and knowledge of when the relevant institution meets is sufficient infrastructure for an operation aimed at the Security Council.</p>
@@ -704,8 +736,7 @@
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.13.0/lottie.min.js" defer></script>
-<script src="app.js?v=20260805h" defer></script>
+<script src="app.js?v=20260805i" defer></script>
 
 <!-- Wave chart -->
 <script src="wave-chart.js?v=20260805e" defer></script>
