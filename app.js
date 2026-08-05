@@ -391,7 +391,7 @@
 
   /* ---- Section scrollspy ---- */
   (function () {
-    var links = Array.prototype.slice.call(document.querySelectorAll('.spy-link'));
+    var links = Array.prototype.slice.call(document.querySelectorAll('.mh-nav a, .mh-mobile a'));
     if (!links.length) return;
     var ids = [];
     var sections = [];
