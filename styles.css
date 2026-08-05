@@ -494,6 +494,36 @@ a:focus-visible {
 
 .stats-big .stat-value { font-size: 36px; }
 
+@media (max-width: 767px) {
+  .stats-scroll { overflow-x: hidden; }
+
+  .stats-track {
+    min-width: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 20px;
+    row-gap: 24px;
+  }
+
+  .stats-item {
+    flex: 1 1 calc(50% - 20px);
+    max-width: 240px;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .stat-sep { display: none; }
+
+  .stat-value { font-size: 24px; }
+
+  .stats-big .stat-value { font-size: 28px; }
+
+  .stat-label {
+    letter-spacing: 0.06em;
+    white-space: normal;
+  }
+}
+
 /* Curtain image reveal */
 .curtain {
   display: block;
