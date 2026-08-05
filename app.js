@@ -425,22 +425,67 @@
     onScroll();
   })();
 
-  /* ---- Deconstructed words in the concluding quote ---- */
+  /* ---- Animated concluding quotes: word-by-word reveal + deconstructed words ---- */
   (function () {
     var quotes = Array.prototype.slice.call(document.querySelectorAll('.con-quote'));
     if (!quotes.length) return;
+
+    function wrapWords(quote) {
+      var idx = 0;
+      Array.prototype.forEach.call(quote.querySelectorAll('p'), function (p) {
+        var kids = Array.prototype.slice.call(p.childNodes);
+        var frag = document.createDocumentFragment();
+        kids.forEach(function (node) {
+          if (node.nodeType === 3) {
+            var parts = String(node.nodeValue).split(/(\s+)/);
+            parts.forEach(function (part) {
+              if (!part) return;
+              if (/^\s+$/.test(part)) {
+                frag.appendChild(document.createTextNode(' '));
+                return;
+              }
+              var w = document.createElement('span');
+              w.className = 'qw';
+              w.textContent = part;
+              w.style.transitionDelay = (idx * 45) + 'ms';
+              frag.appendChild(w);
+              frag.appendChild(document.createTextNode(' '));
+              idx++;
+            });
+            return;
+          }
+          var holder = document.createElement('span');
+          holder.className = 'qw';
+          holder.style.transitionDelay = (idx * 45) + 'ms';
+          idx++;
+          if (node.classList && node.classList.contains('dec')) {
+            holder.classList.add('dec-holder');
+            node.style.animationDelay = (idx * 45 + 650) + 'ms';
+          }
+          frag.appendChild(holder);
+          holder.appendChild(node);
+        });
+        p.textContent = '';
+        p.appendChild(frag);
+      });
+    }
+
+    quotes.forEach(function (q) {
+      if (!q.querySelector('.qw')) wrapWords(q);
+    });
+
     if (!('IntersectionObserver' in window)) {
-      quotes.forEach(function (q) { q.classList.add('deconstructed'); });
+      quotes.forEach(function (q) { q.classList.add('animated'); });
       return;
     }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
-          e.target.classList.add('deconstructed');
+          e.target.classList.add('animated');
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.6 });
+    }, { threshold: 0.4 });
     quotes.forEach(function (q) { io.observe(q); });
   })();
 

@@ -1988,6 +1988,38 @@ a:focus-visible {
   color: var(--color-ink);
 }
 
+/* Word-by-word reveal for the concluding quotes */
+.con-quote .qw {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  filter: blur(4px);
+  transition: opacity 500ms ease, transform 500ms ease, filter 500ms ease;
+  will-change: opacity, transform, filter;
+}
+
+.con-quote.animated .qw {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.con-quote .dec-holder { white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  .con-quote .qw {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .con-quote .dec::before,
+  .con-quote .dec::after { display: none; }
+
+  .con-quote.animated .dec { animation: none; }
+}
+
 /* Deconstructed words in the concluding quote */
 .con-quote .dec {
   position: relative;
@@ -2006,17 +2038,17 @@ a:focus-visible {
   white-space: nowrap;
 }
 
-.con-quote.deconstructed .dec {
+.con-quote.animated .dec {
   text-decoration: line-through;
   text-decoration-color: var(--color-primary);
   animation: dec-jitter 0.9s steps(2, end) 0.1s;
 }
 
-.con-quote.deconstructed .dec::before {
+.con-quote.animated .dec::before {
   animation: dec-slip-a 1.1s steps(2, end) 0.1s;
 }
 
-.con-quote.deconstructed .dec::after {
+.con-quote.animated .dec::after {
   animation: dec-slip-b 1.3s steps(2, end) 0.3s;
 }
 
