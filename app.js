@@ -68,7 +68,7 @@
     var current = 0;
     var timer = null;
     var visible = false;
-    var PAUSE = 2400;
+    var PAUSE = 1700;
 
     function setActive() {
       cards.forEach(function (c, i) { c.classList.toggle('ev-active', i === current); });
