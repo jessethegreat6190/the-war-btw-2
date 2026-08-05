@@ -141,17 +141,18 @@
     setActive();
   })();
 
-  /* ---- Data center engagement bars ---- */
+  /* ---- Engagement total-views bars ---- */
   (function () {
-    var wrap = document.getElementById('dcBars');
+    var wrap = document.querySelector('.eng-chart');
     if (!wrap) return;
-    var fills = wrap.querySelectorAll('.dc-bar-fill');
+    var bars = wrap.querySelectorAll('.eng-bar');
+    if (!bars.length) return;
     var done = false;
     function run() {
       if (done) return;
       done = true;
-      Array.prototype.forEach.call(fills, function (f) {
-        f.style.width = f.getAttribute('data-width') || '0%';
+      Array.prototype.forEach.call(bars, function (b) {
+        b.style.width = (parseFloat(b.getAttribute('data-pct')) || 0) + '%';
       });
     }
     if (!('IntersectionObserver' in window)) { run(); return; }
@@ -170,18 +171,31 @@
     var slides = track.children;
     if (!slides.length) return;
     var dots = Array.prototype.slice.call(document.querySelectorAll('#simDots .sim-dot'));
+    var prev = document.getElementById('simPrev');
+    var next = document.getElementById('simNext');
+    var counter = document.getElementById('simCounter');
+    var total = slides.length;
     var i = 0;
 
-    function go(n) {
-      i = Math.max(0, Math.min(slides.length - 1, n));
+    function render() {
       track.style.transform = 'translateX(-' + (i * 100) + '%)';
       dots.forEach(function (d, k) { d.classList.toggle('active', k === i); });
+      if (counter) counter.textContent = (i + 1) + ' / ' + total;
+      if (prev) prev.disabled = i === 0;
+      if (next) next.disabled = i === total - 1;
+    }
+
+    function go(n) {
+      i = Math.max(0, Math.min(total - 1, n));
+      render();
     }
 
     dots.forEach(function (d) {
       d.addEventListener('click', function () { go(parseInt(d.getAttribute('data-go'), 10)); });
     });
-    go(0);
+    if (prev) prev.addEventListener('click', function () { go(i - 1); });
+    if (next) next.addEventListener('click', function () { go(i + 1); });
+    render();
   })();
 
   /* ---- Search screenshot lightbox ---- */
@@ -208,6 +222,11 @@
     Array.prototype.forEach.call(document.querySelectorAll('.sim-zoom'), function (b) {
       b.addEventListener('click', function () {
         open(b.getAttribute('data-img'), b.getAttribute('data-alt'));
+      });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.ops-verb-imgs img'), function (im) {
+      im.addEventListener('click', function () {
+        open(im.getAttribute('src'), im.getAttribute('alt'));
       });
     });
 
@@ -267,20 +286,18 @@
     }
 
     function runFirst() {
+      if (big) {
+        big.classList.add('stats-in');
+        var bv = big.querySelector('.stat-value[data-count]');
+        if (bv) countTo(bv, parseInt(bv.getAttribute('data-count'), 10) || 0, 1400);
+      }
       holds.forEach(function (h, i) {
         setTimeout(function () {
           h.classList.add('stats-in');
           var v = h.querySelector('.stat-value[data-count]');
           if (v) countTo(v, parseInt(v.getAttribute('data-count'), 10) || 0, 900);
-        }, i * 140);
+        }, 260 + i * 150);
       });
-      setTimeout(function () {
-        if (big) {
-          big.classList.add('stats-in');
-          var v = big.querySelector('.stat-value[data-count]');
-          if (v) countTo(v, parseInt(v.getAttribute('data-count'), 10) || 0, 1400);
-        }
-      }, holds.length * 140 + 300);
     }
 
     if (!('IntersectionObserver' in window)) {
