@@ -54,8 +54,21 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
     Array.prototype.forEach.call(items, function (el) { io.observe(el); });
+  })();
+
+  /* ---- Lottie document icon ---- */
+  (function () {
+    var el = document.getElementById('docIcon');
+    if (!el || typeof window.lottie === 'undefined') return;
+    window.lottie.loadAnimation({
+      container: el,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'assets/document-icon.json'
+    });
   })();
 
   /* ---- Evidence rail auto-advance ---- */
@@ -234,6 +247,7 @@
     var values = Array.prototype.slice.call(strip.querySelectorAll('.stat-value[data-count]'));
     if (!values.length) return;
     var holds = Array.prototype.slice.call(strip.querySelectorAll('.stats-hold'));
+    var big = strip.querySelector('.stats-big');
     var started = false;
 
     function format(n, el) {
@@ -253,23 +267,25 @@
     }
 
     function runFirst() {
-      var el = values[0];
-      var target = parseInt(el.getAttribute('data-count'), 10) || 0;
-      countTo(el, target, 1400, function () {
-        holds.forEach(function (h, i) {
-          setTimeout(function () { h.classList.add('stats-in'); }, i * 160);
-        });
+      holds.forEach(function (h, i) {
         setTimeout(function () {
-          values.forEach(function (v, k) {
-            if (k === 0) return;
-            countTo(v, parseInt(v.getAttribute('data-count'), 10) || 0, 1200);
-          });
-        }, holds.length * 160 + 300);
+          h.classList.add('stats-in');
+          var v = h.querySelector('.stat-value[data-count]');
+          if (v) countTo(v, parseInt(v.getAttribute('data-count'), 10) || 0, 900);
+        }, i * 140);
       });
+      setTimeout(function () {
+        if (big) {
+          big.classList.add('stats-in');
+          var v = big.querySelector('.stat-value[data-count]');
+          if (v) countTo(v, parseInt(v.getAttribute('data-count'), 10) || 0, 1400);
+        }
+      }, holds.length * 140 + 300);
     }
 
     if (!('IntersectionObserver' in window)) {
       holds.forEach(function (h) { h.classList.add('stats-in'); });
+      if (big) big.classList.add('stats-in');
       values.forEach(function (v) { v.textContent = format(parseInt(v.getAttribute('data-count'), 10) || 0, v); });
       return;
     }

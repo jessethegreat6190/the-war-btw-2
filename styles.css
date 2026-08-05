@@ -123,7 +123,7 @@ a:focus-visible {
 .reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 800ms ease, transform 800ms ease;
+  transition: opacity 500ms ease, transform 500ms ease;
 }
 
 .reveal.is-visible {
@@ -134,7 +134,7 @@ a:focus-visible {
 .reveal-top {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 800ms ease, transform 800ms ease;
+  transition: opacity 500ms ease, transform 500ms ease;
 }
 
 .reveal-top.is-visible {
@@ -284,7 +284,7 @@ a:focus-visible {
 
 .hero-title {
   font-family: var(--font-display-alt);
-  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  font-size: clamp(2.8rem, 6vw, 71.4px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.02em;
@@ -301,7 +301,7 @@ a:focus-visible {
 
 .hero-subtitle {
   font-family: var(--font-body);
-  font-size: 1.15rem;
+  font-size: 19.55px;
   font-weight: 300;
   font-style: italic;
   line-height: 1.65;
@@ -339,17 +339,26 @@ a:focus-visible {
 .report-callout {
   max-width: 560px;
   margin: 32px auto 0;
-  text-align: left;
+  text-align: center;
 }
 
-.report-callout-label {
-  font-family: var(--font-sans, "Libre Franklin", sans-serif);
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-muted);
-  margin-bottom: 8px;
+.report-callout-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.rp-icon {
+  width: 30px;
+  height: 30px;
+  flex: none;
+}
+
+.rp-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .report-btn {
@@ -395,7 +404,7 @@ a:focus-visible {
 .stats-track {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 24px;
   min-width: 600px;
 }
@@ -435,16 +444,20 @@ a:focus-visible {
   background: var(--color-hairline-light);
 }
 
-.stats-hold {
+.stats-hold,
+.stats-big {
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 500ms ease, transform 500ms ease;
 }
 
-.stats-hold.stats-in {
+.stats-hold.stats-in,
+.stats-big.stats-in {
   opacity: 1;
   transform: translateY(0);
 }
+
+.stats-big .stat-value { font-size: 36px; }
 
 /* Curtain image reveal */
 .curtain {
@@ -2088,38 +2101,84 @@ a:focus-visible {
   }
 }
 
-/* Bar chart (test/index.html format) */
-.bar-chart {
-  display: grid;
-  gap: 0.9rem;
-  padding-top: 0.5rem;
+/* Comparative posting chart */
+.cmp-chart {
+  margin: 18px 0 10px;
+  padding: 18px 20px 14px;
+  border: 1px solid var(--color-hairline-light);
+  border-radius: 10px;
+  background: var(--color-surface);
+  box-shadow: 0 1px 2px rgba(26, 26, 26, 0.03);
 }
 
-.bar-row {
-  display: grid;
-  grid-template-columns: 118px minmax(0, 1fr) auto;
-  gap: 0.8rem;
-  align-items: center;
-}
-
-.bar-row span {
+.cmp-title {
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--color-muted);
-  font-size: 0.82rem;
+  margin-bottom: 14px;
 }
 
-.bar-row strong {
-  display: inline-block;
-  width: var(--value);
-  min-width: 60px;
-  max-width: 100%;
-  background: var(--color-ink);
-  color: #fff;
-  border-radius: 999px;
-  text-align: center;
-  padding: 0.65rem 0.7rem;
-  font-size: 0.82rem;
+.cmp-row {
+  display: grid;
+  grid-template-columns: 128px minmax(60px, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.cmp-name {
   font-family: var(--font-mono);
-  line-height: 1.4;
+  font-size: 0.68rem;
+  color: var(--color-body);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cmp-bar {
+  position: relative;
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(26, 26, 26, 0.06);
+  overflow: hidden;
+}
+
+.cmp-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--w);
+  min-width: 4px;
+  border-radius: 5px;
+}
+
+.cmp-blue { background: #3b82f6; }
+.cmp-green { background: #16a34a; }
+.cmp-orange { background: #f97316; }
+.cmp-purple { background: #9333ea; }
+
+.cmp-row.cmp-human .cmp-bar {
+  background: transparent;
+}
+
+.cmp-row.cmp-human .cmp-bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border-top: 2px dashed #9ca3af;
+}
+
+.cmp-meta {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  white-space: nowrap;
 }
 
 /* Wave chart embed */
@@ -2129,6 +2188,7 @@ a:focus-visible {
   border-radius: 4px;
   padding: 24px 20px 16px;
   max-width: 700px;
+  margin: 0 auto;
 }
 
 .wave-chart-embed .wc-legend {

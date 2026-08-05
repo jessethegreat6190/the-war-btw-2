@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&family=Courier+Prime:wght@400;700&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260805b" />
+  <link rel="stylesheet" href="styles.css?v=20260805c" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
   <noscript>
     <style>.reveal, .reveal-top { opacity: 1; transform: none; }</style>
@@ -70,8 +70,8 @@
         <div class="byline-date">July 2026 &middot; 12 min read</div>
       </div>
       <div class="report-callout">
-        <div>
-          <p class="report-callout-label">Full report</p>
+        <div class="report-callout-row">
+          <div id="docIcon" class="rp-icon" aria-hidden="true"></div>
           <a href="assets/Manufactured_Reality_from_ThraetSpace.pdf" target="_blank" rel="noreferrer" class="report-btn">Read the full report <span class="pill-arrow">&rarr;</span></a>
         </div>
       </div>
@@ -83,13 +83,6 @@
 <section class="stats-strip" aria-label="Investigation dataset summary">
   <div class="container-wide stats-scroll">
     <div class="stats-track">
-      <div class="stats-item">
-        <div class="min-w-0">
-          <div class="stat-value" data-count="2000" data-suffix="+">2,000+</div>
-          <div class="stat-label">Posts analysed</div>
-        </div>
-        <span class="stat-sep" aria-hidden="true"></span>
-      </div>
       <div class="stats-item stats-hold">
         <div>
           <div class="stat-value" data-count="12">12</div>
@@ -104,6 +97,13 @@
         </div>
         <span class="stat-sep" aria-hidden="true"></span>
       </div>
+      <div class="stats-item stats-big">
+        <div>
+          <div class="stat-value accent" data-count="2000" data-suffix="+">2,000+</div>
+          <div class="stat-label">Posts analysed</div>
+        </div>
+        <span class="stat-sep" aria-hidden="true"></span>
+      </div>
       <div class="stats-item stats-hold">
         <div>
           <div class="stat-value" data-count="90">90</div>
@@ -113,7 +113,7 @@
       </div>
       <div class="stats-item stats-hold">
         <div>
-          <div class="stat-value accent" data-count="0">0</div>
+          <div class="stat-value" data-count="0">0</div>
           <div class="stat-label">Prosecutions</div>
         </div>
       </div>
@@ -338,13 +338,33 @@
           <div>
             <h4 class="ops-ev-heading">Feature: Burst posting</h4>
             <p class="ops-ev-text">Multiple accounts published their entire quarterly output in windows of seconds to minutes, in several cases with posts sharing the same timestamp to the second. The pattern is consistent with operators pasting from a prepared list against the posting interface, not composing independently.</p>
-            <div class="bar-chart" aria-label="Burst posting rates by account">
-              <div class="bar-row"><span>MooniPeter</span><strong style="--value: 100%">10 posts &middot; 11 sec</strong></div>
-              <div class="bar-row"><span>NKOTANYI1_</span><strong style="--value: 76%">21 posts &middot; 30 sec</strong></div>
-              <div class="bar-row"><span>FrancoisOb1705</span><strong style="--value: 14%">20 posts &middot; 2.6 min</strong></div>
-              <div class="bar-row"><span>TuyisengeD22748</span><strong style="--value: 7%">28 posts &middot; 7.8 min</strong></div>
-              <div class="bar-row"><span>human baseline</span><strong style="--value: 1.2%">~1 post per 90 sec</strong></div>
-              <div class="bar-row"><span>avg. human</span><strong style="--value: 1.2%">1 post &middot; ~90 sec</strong></div>
+            <div class="cmp-chart" aria-label="Comparative posting activity by account">
+              <div class="cmp-title">Comparative Posting Activity</div>
+              <div class="cmp-row">
+                <span class="cmp-name">MooniPeter</span>
+                <div class="cmp-bar"><div class="cmp-fill cmp-blue" style="--w:100%"></div></div>
+                <span class="cmp-meta">10 posts &middot; 11 sec</span>
+              </div>
+              <div class="cmp-row">
+                <span class="cmp-name">NKOTANYI1_</span>
+                <div class="cmp-bar"><div class="cmp-fill cmp-green" style="--w:76%"></div></div>
+                <span class="cmp-meta">21 posts &middot; 30 sec</span>
+              </div>
+              <div class="cmp-row">
+                <span class="cmp-name">FrancoisOb1705</span>
+                <div class="cmp-bar"><div class="cmp-fill cmp-orange" style="--w:14%"></div></div>
+                <span class="cmp-meta">20 posts &middot; 156 sec</span>
+              </div>
+              <div class="cmp-row">
+                <span class="cmp-name">TuyisengeD22748</span>
+                <div class="cmp-bar"><div class="cmp-fill cmp-purple" style="--w:7%"></div></div>
+                <span class="cmp-meta">28 posts &middot; 468 sec</span>
+              </div>
+              <div class="cmp-row cmp-human">
+                <span class="cmp-name">human baseline</span>
+                <div class="cmp-bar"></div>
+                <span class="cmp-meta">~1 post per 90 sec</span>
+              </div>
             </div>
             <p class="ops-ev-text ops-ev-note">For scale, a human pacing themselves could be expected to post roughly once every 90 seconds, meaning TuyisengeD22748&rsquo;s output alone would take roughly four and a half hours.</p>
           </div>
@@ -368,11 +388,11 @@
             <p class="ops-ev-text">The network posted in four discrete waves, each timed to an open institutional decision window.</p>
             <div class="ops-wave-chart">
               <p class="ops-ev-text">The network posted in four discrete waves, each timed to an open institutional decision window. Drag the slider through the quarter to trace each spike against the event that triggered it.</p>
-              <div class="wave-chart-embed" style="background:#f8f7f5;border:1px solid var(--rule);border-radius:4px;padding:24px 20px 16px;max-width:700px;">
-                <div class="wc-legend" style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:18px;font-family:var(--font-mono);font-size:10px;color:var(--ink-4);">
-                  <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:3px;background:#8B2020;border-radius:1px;display:inline-block"></span>Covert network</span>
-                  <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:2px;border-top:2px dashed #8a6e1e;display:inline-block"></span>Anti-Kagame flooder</span>
-                  <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:2px;background:#2a5fa8;display:inline-block"></span>CongolaisTelema</span>
+              <div class="wave-chart-embed" style="background:#f8f7f5;border:1px solid var(--rule);border-radius:4px;padding:24px 20px 16px;max-width:700px;margin:0 auto;">
+                <div class="wc-legend" style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:18px;font-family:var(--font-mono);font-size:10px;color:var(--ink-4);">
+                  <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:3px;background:#8B2020;border-radius:1px;display:inline-block"></span>Covert network &middot; 612 posts</span>
+                  <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:2px;border-top:2px dashed #8a6e1e;display:inline-block"></span>Anti-Kagame flooder &middot; 152 posts</span>
+                  <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:2px;background:#2a5fa8;display:inline-block"></span>CongolaisTelema &middot; 336 posts</span>
                   <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:2px;background:#7a7468;display:inline-block"></span>Organic conversation</span>
                   <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-left:2px dashed #b0a99e;display:inline-block"></span>Key events</span>
                 </div>
@@ -1130,7 +1150,8 @@
   </div>
 </div>
 
-<script src="app.js?v=20260805c" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.13.0/lottie.min.js" defer></script>
+<script src="app.js?v=20260805d" defer></script>
 
 <!-- Wave chart -->
 <script src="wave-chart.js?v=20260804b" defer></script>
